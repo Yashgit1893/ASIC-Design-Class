@@ -36,11 +36,10 @@ Compiling the code using RISC-V compiler :
 
 </p>
 
-# RISC-V Compilation Command
+
 
 This README explains the RISC-V compilation command used to compile the `sum1ton.c` file.
 
-## Compilation Command
 
 </details>
 
