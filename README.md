@@ -60,7 +60,7 @@ riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
 ```
 
 <p align="left">
-  <img width="750" alt="3_1" src="https://github.com/user-attachments/assets/9748f4ba-ca7f-4daf-af4d-09e8b7b6206f">
+ <img width="750" alt="5" src="https://github.com/user-attachments/assets/a67b6868-c6b6-4182-8bc4-45d7a476a575">
 </p>
 
 The above image shows the output using both `./a.out ` and `spike pk sum1ton.o`. Both of them have same output for sum from 1 to 100.
@@ -73,7 +73,8 @@ Debug the code using spike command :
 spike -d pk sum1ton.o
 ```
 <p align="left">
-  <img width="437" alt="3_2" src="https://github.com/user-attachments/assets/f8219da7-f3e7-42a5-8a50-b5aa451ea796">
+  <img width="750" alt="6" src="https://github.com/user-attachments/assets/3c94ffc0-875e-438f-9bb2-b639d93b2025">
+
 </p>
 
 command for spike debugger to run till instruction 100b0
@@ -87,7 +88,7 @@ reg 0 a2
 The image displays how the value of a2 register changes while manual debugging
 
 <p align="left">
-  <img width="440" alt="3_4" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
+  <img width="" alt="3_4" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
 </p>
 
 Futher steps shows the vlaue at register sp. we again run the instructions from 0 to 100b8.
@@ -104,7 +105,8 @@ reg 0 sp
 The below image shows the manual debug
 
 <p align="left">
-  <img width="440" alt="3_3" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
+  <img width="750" alt="8" src="https://github.com/user-attachments/assets/342235d6-d4f0-4cfe-a257-e676c85610a9">
+
 </p>
 
 </details>
