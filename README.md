@@ -29,23 +29,31 @@ Compiling the code using RISC-V compiler :
   <img width="750" alt="3" src="https://github.com/user-attachments/assets/880561bb-45f1-466d-ada0-306014f6dbff">
 </p>
 
-compiling the `sum1ton.c` using the command :
+compiling the `sum1ton.c` for O1 optimization using the command :
 ```bash
 riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
+```
+```bash
+riscv64-unknown-elf-objdump -d sum1ton.o | less
 ```
 
 <p align="left">
   <img width="750" alt="4" src="https://github.com/user-attachments/assets/b16030f7-9103-41bb-ac09-5b6a0fd19563">
 </p>
 
-compiling the `sum1ton.c` using the command Ofast :
+compiling the `sum1ton.c` for Ofast optimization using the command :
 ```bash
 riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c`
+```
+```bash
+riscv64-unknown-elf-objdump -d sum1ton.o | less
 ```
 
 <p align="left">
   <img width="750" alt="6" src="https://github.com/user-attachments/assets/dac7aa97-b411-4c8e-b383-e54e9f5c3ebc">
 </p>
+
+
 </details>
 
 
