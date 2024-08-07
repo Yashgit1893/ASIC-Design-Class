@@ -21,7 +21,7 @@ Output for sum from 1 to 15 is shown.
 </details>
 
 <details>
-<summary>LAB 2: Compiling the sum1ton.c program using RISC-V compiler. </summary>
+<summary>LAB 2: Compiling the sum1ton.c program of Lab 1 using RISC-V compiler. </summary>
 
 Compiling the code using RISC-V compiler :
 
