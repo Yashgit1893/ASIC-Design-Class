@@ -86,7 +86,8 @@ to check the value at the register a2
 ```bash
 reg 0 a2
 ```
-The image displays how the value of a2 register changes while manual debugging
+The image displays how the value of a2 register changes while manual debugging.
+The instruction lui a0, 0x21 updates the a0 register from 0x0000000000000001 to 0x0000000000021000
 
 <p align="left">
   <img width="750" alt="8" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
@@ -103,7 +104,8 @@ check the value at the register sp
 reg 0 sp
 ```
 
-The below image shows the manual debug
+The below image shows the manual debug.
+`addi sp, sp, -16` instruction decrements the stack pointer (sp) by 16, The value of sp register was 0x0000003ffffffb50, and is now updated to 0x0000003ffffffb40
 
 <p align="left">
   <img width="750" alt="7" src="https://github.com/user-attachments/assets/238392fa-484a-42fb-ae67-50418e61fef1">
