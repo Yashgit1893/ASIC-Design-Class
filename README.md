@@ -49,6 +49,9 @@ compiling the `sum1ton.c` using the command ofast :
 <details>
 <summary>LAB 3: Compiling the sum from 1 to n(lab 1) C program using Spike simulator and debug the code. </summary>
 
+```bash
+riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
+```
 
 
 </details>
