@@ -1,9 +1,9 @@
 # Asic-design-class
 
 <details>
-<summary>LAB 1: Writing a C program and comparing the outputs when compiling the code with both GCC and the RISC-V compiler</summary>
+<summary>LAB 1: C program to calculate sum from 1 to n(given n) and then compare the outputs with both GCC and RISC-V compiler</summary>
 
-### Objective
+##### Objective
 Brief description of the objective of Lab 1.
 
 
