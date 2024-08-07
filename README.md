@@ -41,6 +41,8 @@ riscv64-unknown-elf-objdump -d sum1ton.o | less
   <img width="750" alt="9" src="https://github.com/user-attachments/assets/ca1fdc9f-044e-4c64-b84a-ca40d518ba4f">
 </p>
 
+The number of instruction in the main function in 15
+
 compiling the `sum1ton.c` for Ofast optimization using the command :
 ```bash
 riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c`
@@ -53,6 +55,7 @@ riscv64-unknown-elf-objdump -d sum1ton.o | less
   <img width="750" alt="6" src="https://github.com/user-attachments/assets/dac7aa97-b411-4c8e-b383-e54e9f5c3ebc">
 </p>
 
+Number of instruction in the main function is 12
 
 </details>
 
