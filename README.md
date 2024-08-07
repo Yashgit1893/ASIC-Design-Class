@@ -4,14 +4,14 @@
 <summary>LAB 1: C program to calculate sum from 1 to n (given n) and then compiling the code with both GCC and RISC-V compiler</summary>
 
 
-This is the code to calculate the sum from 1 to n.
+`sum1ton.c` is the file containing code to calculate the sum from 1 to n.
 
 <p align="left">
   <img width="750" alt="1ton" src="https://github.com/user-attachments/assets/c03a8f66-e356-447a-815a-be940fdeec59">
 </p>
 
 Compiling the code using GCC compiler :
-compiling the sum1ton.c with gcc sum1ton.c and run the executable file ./a.out
+compiling the `sum1ton.c` with `gcc sum1ton.c` and run the executable file `./a.out`
 
 <p align="left">
   <img width="750" alt="10" src="https://github.com/user-attachments/assets/9512912e-08f9-4a01-8950-b18ee442cfa4">
