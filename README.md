@@ -56,7 +56,7 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c`
 compiling the `sum1ton.c` using the RISC-V compiler using the Ofast command :
 
 ```bash
-riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
 ```
 
 <p align="left">
@@ -67,15 +67,16 @@ The above image shows the output using both `./a.out ` and `spike pk sum1ton.o`.
 
 ### Debug 
 
+<p align="left">
+  <img width="750" alt="6" src="https://github.com/user-attachments/assets/3c94ffc0-875e-438f-9bb2-b639d93b2025">
+</p>
+
+
 Debug the code using spike command :
 
 ```bash
 spike -d pk sum1ton.o
 ```
-<p align="left">
-  <img width="750" alt="6" src="https://github.com/user-attachments/assets/3c94ffc0-875e-438f-9bb2-b639d93b2025">
-
-</p>
 
 command for spike debugger to run till instruction 100b0
 ```bash
