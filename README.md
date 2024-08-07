@@ -1,7 +1,7 @@
 # Asic-design-class
 
 <details>
-<summary>LAB 1: C program to calculate sum from 1 to n (given n) and then compiling the code with both GCC compiler</summary>
+<summary>LAB 1: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
 
 `sum1ton.c` is the file containing code to calculate the sum from 1 to n.
 
@@ -21,7 +21,7 @@ Output for sum from 1 to 15 is shown.
 </details>
 
 <details>
-<summary>LAB 2: Compiling the sum from 1 to n(lab 1) C program using RISC-V compiler. </summary>
+<summary>LAB 2: Compiling the sum from 1 to n(value of n in the code sum1ton.c of Lab 1 is changed to 100) C program using RISC-V compiler. </summary>
 
 Compiling the code using RISC-V compiler :
 
@@ -51,7 +51,7 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c`
 
 
 <details>
-<summary>LAB 3: Compiling the sum from 1 to n(lab 1) C program using Spike simulator and debug the code. </summary>
+<summary>LAB 3: Compiling the sum from 1 to n(value of n in the code sum1ton.c of Lab 1 is changed to 100) C program using Spike simulator and debug the code. </summary>
 
 compiling the `sum1ton.c` using the RISC-V compiler using the Ofast command :
 
