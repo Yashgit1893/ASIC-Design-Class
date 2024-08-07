@@ -44,7 +44,7 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c`
 ```
 
 <p align="left">
-  <img width="750" alt="6" src="https://github.com/user-attachments/assets/52816414-52f2-49cd-b9e0-b25e3db9c375">
+  <img width="750" alt="6" src="https://github.com/user-attachments/assets/dac7aa97-b411-4c8e-b383-e54e9f5c3ebc">
 </p>
 </details>
 
