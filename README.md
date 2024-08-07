@@ -1,7 +1,7 @@
 # Asic-design-class
 
 <details>
-<summary>LAB 1: C program to calculate sum from 1 to n (given n) and then compiling the code with both GCC and RISC-V compiler</summary>
+<summary>LAB 1: C program to calculate sum from 1 to n (given n) and then compiling the code with both GCC compiler</summary>
 
 `sum1ton.c` is the file containing code to calculate the sum from 1 to n.
 
@@ -21,7 +21,7 @@ Output for sum from 1 to 15 is shown.
 </details>
 
 <details>
-<summary>LAB 2: C program to calculate sum from 1 to n (given n) and then compiling the code with both GCC and RISC-V compiler</summary>
+<summary>LAB 2: Compiling the sum from 1 to n(lab 1) C program using RISC-V compiler. </summary>
 
 Compiling the code using RISC-V compiler :
 
