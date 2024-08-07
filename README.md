@@ -25,12 +25,12 @@ Compiling the code using RISC-V compiler :
   <img width="750" alt="Screenshot 2024-08-07 125754" src="https://github.com/user-attachments/assets/880561bb-45f1-466d-ada0-306014f6dbff">
 </p>
 
-riscv64-unknown-elf-gcc -o1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
+'riscv64-unknown-elf-gcc -o1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c'
 <p align="left">
   <img width="750" alt="Screenshot 2024-08-07 124955" src="https://github.com/user-attachments/assets/b16030f7-9103-41bb-ac09-5b6a0fd19563">
 </p>
 
-riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
+'riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c'
 <p align="left">
   <img width="750" alt="2Screenshot 2024-08-07 125611" src="https://github.com/user-attachments/assets/52816414-52f2-49cd-b9e0-b25e3db9c375">
 
