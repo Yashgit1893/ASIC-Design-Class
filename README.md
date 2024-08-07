@@ -21,7 +21,7 @@ Output for sum from 1 to 15 is shown.
 </details>
 
 <details>
-<summary>LAB 2: Compiling the sum from 1 to n(value of n in the code sum1ton.c of Lab 1 is changed to 100) C program using RISC-V compiler. </summary>
+<summary>LAB 2: Compiling the sum1ton.c program using RISC-V compiler. </summary>
 
 Compiling the code using RISC-V compiler :
 
