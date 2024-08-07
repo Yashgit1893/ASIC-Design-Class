@@ -97,7 +97,8 @@ reg 0 a2
 </p>
 
 The above image displays how the value of a2 register changes while manual debugging.
-The instruction lui a0, 0x21 updates the a0 register from 0x0000000000000001 to 0x0000000000021000.
+The instruction `lui a2, 0x1` instruction changes the a2 register's value from 0x0000000000000000 to 0x0000000000001000.
+The instruction `lui a0, 0x21` updates the a0 register from 0x0000000000001000 to 0x0000000000021000.
 
 
 
