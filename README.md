@@ -67,11 +67,6 @@ The above image shows the output using both `./a.out ` and `spike pk sum1ton.o`.
 
 ### Debug 
 
-<p align="left">
-  <img width="750" alt="6" src="https://github.com/user-attachments/assets/3c94ffc0-875e-438f-9bb2-b639d93b2025">
-</p>
-
-
 Debug the code using spike command :
 
 ```bash
@@ -86,9 +81,15 @@ to check the value at the register a2
 ```bash
 reg 0 a2
 ```
-The image displays how the value of a2 register changes while manual debugging.
-The instruction lui a0, 0x21 updates the a0 register from 0x0000000000000001 to 0x0000000000021000
+<p align="left">
+  <img width="750" alt="6" src="https://github.com/user-attachments/assets/3c94ffc0-875e-438f-9bb2-b639d93b2025">
+</p>
 
+The above image displays how the value of a2 register changes while manual debugging.
+The instruction lui a0, 0x21 updates the a0 register from 0x0000000000000001 to 0x0000000000021000.
+
+
+Futher steps shows the vlaue at register sp. we again run the instructions from 0 to 100b8.
 <p align="left">
   <img width="750" alt="8" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
 </p>
