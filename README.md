@@ -44,7 +44,7 @@ compiling the `sum1ton.c` using the command ofast :
 </p>
 </details>
 
-</details>
+
 
 <details>
 <summary>LAB 2: Compiling the sum from 1 to n(lab 1) C program using RISC-V compiler. </summary>
