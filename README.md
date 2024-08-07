@@ -88,7 +88,7 @@ reg 0 a2
 The image displays how the value of a2 register changes while manual debugging
 
 <p align="left">
-  <img width="" alt="3_4" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
+  <img width="750" alt="8" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
 </p>
 
 Futher steps shows the vlaue at register sp. we again run the instructions from 0 to 100b8.
@@ -105,7 +105,6 @@ reg 0 sp
 The below image shows the manual debug
 
 <p align="left">
-  <img width="750" alt="8" src="https://github.com/user-attachments/assets/342235d6-d4f0-4cfe-a257-e676c85610a9">
 
 </p>
 
