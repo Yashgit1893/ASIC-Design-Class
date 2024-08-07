@@ -49,9 +49,20 @@ compiling the `sum1ton.c` using the command ofast :
 <details>
 <summary>LAB 3: Compiling the sum from 1 to n(lab 1) C program using Spike simulator and debug the code. </summary>
 
+compiling the `sum1ton.c` using the RISC-V compiler using the Ofast command :
+
 ```bash
-riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
+riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
 ```
+
+<p align="left">
+  <img width="440" alt="3_1" src="https://github.com/user-attachments/assets/9748f4ba-ca7f-4daf-af4d-09e8b7b6206f">
+</p>
+
+The above image shows the output using both `./a.out ` and `spike pk sum1ton.o`. Both of them have same output for sum from 1 to 100.
+
+## Debug 
+
 
 
 </details>
