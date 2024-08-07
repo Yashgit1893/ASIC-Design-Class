@@ -16,6 +16,13 @@ Compiling the code using GCC compiler
   <img width="750" alt="10" src="https://github.com/user-attachments/assets/9512912e-08f9-4a01-8950-b18ee442cfa4">
 </p>
 
+Output for sum from 1 to 15 is shown.
+
+Compiling the code using GCC compiler 
+
+
+
+
 
 
 
