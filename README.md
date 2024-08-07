@@ -56,13 +56,51 @@ riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
 ```
 
 <p align="left">
-  <img width="440" alt="3_1" src="https://github.com/user-attachments/assets/9748f4ba-ca7f-4daf-af4d-09e8b7b6206f">
+  <img width="750" alt="3_1" src="https://github.com/user-attachments/assets/9748f4ba-ca7f-4daf-af4d-09e8b7b6206f">
 </p>
 
 The above image shows the output using both `./a.out ` and `spike pk sum1ton.o`. Both of them have same output for sum from 1 to 100.
 
-## Debug 
+### Debug 
 
+Debug the code using spike command :
 
+```bash
+spike -d pk sum1ton.o
+```
+<p align="left">
+  <img width="437" alt="3_2" src="https://github.com/user-attachments/assets/f8219da7-f3e7-42a5-8a50-b5aa451ea796">
+</p>
+
+command for spike debugger to run till instruction 100b0
+```bash
+until pc 0 100b0
+```
+to check the value at the register a2
+```bash
+reg 0 a2
+```
+The image displays how the value of a2 register changes while manual debugging
+
+<p align="left">
+  <img width="440" alt="3_4" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
+</p>
+
+Futher steps shows the vlaue at register sp. we again run the instructions from 0 to 100b8.
+
+```bash
+until pc 0 100b8
+```
+
+check the value at the register sp
+```bash
+reg 0 sp
+```
+
+The below image shows the manual debug
+
+<p align="left">
+  <img width="440" alt="3_3" src="https://github.com/user-attachments/assets/4afaa25c-43f5-4e74-9997-76b20d08897c">
+</p>
 
 </details>
