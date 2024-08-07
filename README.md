@@ -105,7 +105,7 @@ reg 0 sp
 The below image shows the manual debug
 
 <p align="left">
-
+  <img width="750" alt="7" src="https://github.com/user-attachments/assets/238392fa-484a-42fb-ae67-50418e61fef1">
 </p>
 
 </details>
