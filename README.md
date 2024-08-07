@@ -38,7 +38,7 @@ riscv64-unknown-elf-objdump -d sum1ton.o | less
 ```
 
 <p align="left">
-  <img width="750" alt="4" src="https://github.com/user-attachments/assets/b16030f7-9103-41bb-ac09-5b6a0fd19563">
+  <img width="750" alt="9" src="https://github.com/user-attachments/assets/ca1fdc9f-044e-4c64-b84a-ca40d518ba4f">
 </p>
 
 compiling the `sum1ton.c` for Ofast optimization using the command :
