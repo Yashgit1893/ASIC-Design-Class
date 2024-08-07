@@ -121,4 +121,8 @@ The below image shows the manual debug.
   <img width="750" alt="7" src="https://github.com/user-attachments/assets/238392fa-484a-42fb-ae67-50418e61fef1">
 </p>
 
+Note :
+
+1. lui stands for Load Upper Immediate, operates on the higher 16 bits and addi (Add Immediate) performs addition between the immediate value and the contents of the source register, then places the result into the destination register.
+
 </details>
