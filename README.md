@@ -57,6 +57,8 @@ riscv64-unknown-elf-objdump -d sum1ton.o | less
 
 Number of instruction in the main function is 12
 
+Note : O1 optimization follows the standards but Ofast might break some programs, Ofast takes lesser number of instructions and provides better optimisation than O1
+
 </details>
 
 
