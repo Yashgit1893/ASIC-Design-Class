@@ -29,7 +29,7 @@ Compiling the code using RISC-V compiler :
   <img width="750" alt="3" src="https://github.com/user-attachments/assets/880561bb-45f1-466d-ada0-306014f6dbff">
 </p>
 
-compiling the `sum1ton.c` for O1 optimization using the command :
+compiling the `sum1ton.c` usung O1 optimization :
 ```bash
 riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
 ```
@@ -43,7 +43,7 @@ riscv64-unknown-elf-objdump -d sum1ton.o | less
 
 The number of instruction in the main function in 15
 
-compiling the `sum1ton.c` for Ofast optimization using the command :
+compiling the `sum1ton.c` using Ofast optimization :
 ```bash
 riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c`
 ```
