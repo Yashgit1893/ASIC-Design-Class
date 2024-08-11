@@ -131,9 +131,115 @@ Note :
 
 
 <details>
-<summary>LAB 1: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
+<summary>LAB 4: RISC-V Instructions</summary>
+RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction set architecture (ISA) based on established principles of RISC. The RISC-V ISA has a small number of instruction formats, making it relatively simple to understand and implement. The primary instruction formats in RISC-V are **R-type, I-type, S-type, B-type, U-type,** and **J-type**. Each format is designed for different types of operations and encodes different information in the instruction's 32 bits.
+
+### 1. R-type (Register)
+- **Used for:** Arithmetic and logical operations that involve two source registers and one destination register.
+- **Instruction format:**
+  - **opcode (7 bits):** Operation code that specifies the instruction.
+  - **rd (5 bits):** Destination register.
+  - **funct3 (3 bits):** Function modifier for opcode; helps determine the specific operation.
+  - **rs1 (5 bits):** First source register.
+  - **rs2 (5 bits):** Second source register.
+  - **funct7 (7 bits):** Additional function modifier; often used to extend the opcode.
+
+  **Structure:**
+  ```
+  [ funct7 | rs2 | rs1 | funct3 | rd | opcode ]
+    7 bits | 5 bits | 5 bits | 3 bits | 5 bits | 7 bits
+  ```
+
+  **Example:** `add rd, rs1, rs2` - Adds the values in registers `rs1` and `rs2`, and stores the result in register `rd`.
+
+### 2. I-type (Immediate)
+- **Used for:** Operations that involve one register and an immediate value (a constant).
+- **Instruction format:**
+  - **opcode (7 bits):** Operation code.
+  - **rd (5 bits):** Destination register.
+  - **funct3 (3 bits):** Function modifier.
+  - **rs1 (5 bits):** Source register.
+  - **imm[11:0] (12 bits):** Immediate value.
+
+  **Structure:**
+  ```
+  [ imm[11:0] | rs1 | funct3 | rd | opcode ]
+     12 bits | 5 bits | 3 bits | 5 bits | 7 bits
+  ```
+
+  **Example:** `addi rd, rs1, imm` - Adds the immediate value `imm` to the value in `rs1` and stores the result in `rd`.
+
+### 3. S-type (Store)
+- **Used for:** Store operations, where data from a register is stored into memory.
+- **Instruction format:**
+  - **opcode (7 bits):** Operation code.
+  - **imm[11:5] (7 bits):** Upper bits of the immediate value.
+  - **rs2 (5 bits):** Source register (data to store).
+  - **rs1 (5 bits):** Base address register.
+  - **funct3 (3 bits):** Function modifier.
+  - **imm[4:0] (5 bits):** Lower bits of the immediate value.
+
+  **Structure:**
+  ```
+  [ imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode ]
+      7 bits | 5 bits | 5 bits | 3 bits | 5 bits | 7 bits
+  ```
+
+  **Example:** `sw rs2, imm(rs1)` - Stores the value in `rs2` into the memory address computed as `rs1 + imm`.
+
+### 4. B-type (Branch)
+- **Used for:** Conditional branching, where the program may jump to a different instruction based on a comparison.
+- **Instruction format:**
+  - **opcode (7 bits):** Operation code.
+  - **imm[12] (1 bit):** Immediate value (bit 12).
+  - **imm[10:5] (6 bits):** Immediate value (bits 10-5).
+  - **rs2 (5 bits):** Second source register.
+  - **rs1 (5 bits):** First source register.
+  - **funct3 (3 bits):** Function modifier.
+  - **imm[4:1] (4 bits):** Immediate value (bits 4-1).
+  - **imm[11] (1 bit):** Immediate value (bit 11).
+
+  **Structure:**
+  ```
+  [ imm[12] | imm[10:5] | rs2 | rs1 | funct3 | imm[4:1] | imm[11] | opcode ]
+     1 bit  |  6 bits  | 5 bits | 5 bits | 3 bits |  4 bits  |  1 bit  | 7 bits
+  ```
+
+  **Example:** `beq rs1, rs2, imm` - If `rs1` equals `rs2`, the program counter (PC) is updated to `PC + imm`, branching to a new instruction.
+
+### 5. U-type (Upper Immediate)
+- **Used for:** Operations that involve a 20-bit immediate value, typically used to load a large constant.
+- **Instruction format:**
+  - **opcode (7 bits):** Operation code.
+  - **rd (5 bits):** Destination register.
+  - **imm[31:12] (20 bits):** Upper 20 bits of the immediate value.
+
+  **Structure:**
+  ```
+  [ imm[31:12] | rd | opcode ]
+     20 bits  | 5 bits | 7 bits
+  ```
+
+  **Example:** `lui rd, imm` - Loads the upper 20 bits of the immediate value into the destination register `rd`.
+
+### 6. J-type (Jump)
+- **Used for:** Jump operations, where the program counter is directly modified to jump to a different instruction address.
+- **Instruction format:**
+  - **opcode (7 bits):** Operation code.
+  - **rd (5 bits):** Destination register.
+  - **imm[20] (1 bit):** Immediate value (bit 20).
+  - **imm[10:1] (10 bits):** Immediate value (bits 10-1).
+  - **imm[11] (1 bit):** Immediate value (bit 11).
+  - **imm[19:12] (8 bits):** Immediate value (bits 19-12).
+
+  **Structure:**
+  ```
+  [ imm[20] | imm[10:1] | imm[11] | imm[19:12] | rd | opcode ]
+     1 bit  |  10 bits | 1 bit  |  8 bits  | 5 bits | 7 bits
+  ```
+
+  **Example:** `jal rd, imm` - Jumps to the address `PC + imm`, and stores the return address in `rd`.
 
 
-Output for sum from 1 to 15 is shown.
 
 </details>
