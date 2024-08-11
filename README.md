@@ -225,7 +225,7 @@ RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction se
   <img width="750" alt="1" src="https://github.com/user-attachments/assets/d5232af0-8c4e-4fe8-9aa9-7fc77967a66b">
 </p>
 
-## Explanation of the subfields :
+### Explanation of the subfields :
 
 ### Immediate (`imm`)
 A variable-length field embedded in instructions, representing a constant value. It's used directly as an operand or offset in various operations, such as arithmetic, memory access, and branching. The size and location differ across instruction formats, with some requiring sign extension.
@@ -244,7 +244,7 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
 - **`rd`:** The destination register where the result is stored. These fields are central to operations across RISC-V formats, ensuring consistent and efficient register access.
 
 
-## Instructions given
+### Instructions given
 
 ``` bash
  ADD r5, r6, r7
@@ -261,5 +261,122 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
  LW r13, r11, 2
  SLL r15, r11, r2
 ```
+### Analyzing the instructions
+
+
+### 1. **ADD r5, r6, r7** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r5` (`00001`)
+   - **funct3:** `000` (for ADD)
+   - **rs1:** `r6` (`00110`)
+   - **rs2:** `r7` (`00111`)
+   - **funct7:** `0000000`
+   - **Binary Encoding:** `0000000 00111 00110 000 00001 0110011`
+
+### 2. **SUB r7, r5, r6** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r7` (`00111`)
+   - **funct3:** `000` (for SUB)
+   - **rs1:** `r5` (`00101`)
+   - **rs2:** `r6` (`00110`)
+   - **funct7:** `0100000`
+   - **Binary Encoding:** `0100000 00110 00101 000 00111 0110011`
+
+### 3. **AND r6, r5, r7** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r6` (`00110`)
+   - **funct3:** `111` (for AND)
+   - **rs1:** `r5` (`00101`)
+   - **rs2:** `r7` (`00111`)
+   - **funct7:** `0000000`
+   - **Binary Encoding:** `0000000 00111 00101 111 00110 0110011`
+
+### 4. **OR r8, r6, r5** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r8` (`01000`)
+   - **funct3:** `110` (for OR)
+   - **rs1:** `r6` (`00110`)
+   - **rs2:** `r5` (`00101`)
+   - **funct7:** `0000000`
+   - **Binary Encoding:** `0000000 00101 00110 110 01000 0110011`
+
+### 5. **XOR r8, r5, r4** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r8` (`01000`)
+   - **funct3:** `100` (for XOR)
+   - **rs1:** `r5` (`00101`)
+   - **rs2:** `r4` (`00100`)
+   - **funct7:** `0000000`
+   - **Binary Encoding:** `0000000 00100 00101 100 01000 0110011`
+
+### 6. **SLT r10, r2, r4** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r10` (`01010`)
+   - **funct3:** `010` (for SLT)
+   - **rs1:** `r2` (`00010`)
+   - **rs2:** `r4` (`00100`)
+   - **funct7:** `0000000`
+   - **Binary Encoding:** `0000000 00100 00010 010 01010 0110011`
+
+### 7. **ADDI r12, r3, 5** (I-type)
+   - **Opcode:** `0010011` (I-type)
+   - **rd:** `r12` (`01100`)
+   - **funct3:** `000` (for ADDI)
+   - **rs1:** `r3` (`00011`)
+   - **imm[11:0]:** `000000000101` (Immediate value = 5)
+   - **Binary Encoding:** `000000000101 00011 000 01100 0010011`
+
+### 8. **SW r3, r1, 4** (S-type)
+   - **Opcode:** `0100011` (S-type)
+   - **imm[11:5]:** `0000000` (High 7 bits of the immediate)
+   - **rs2:** `r3` (`00011`)
+   - **rs1:** `r1` (`00001`)
+   - **funct3:** `010` (for SW)
+   - **imm[4:0]:** `00100` (Low 5 bits of the immediate, 4 in decimal)
+   - **Binary Encoding:** `0000000 00011 00001 010 00100 0100011`
+
+### 9. **SRL r16, r11, r2** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r16` (`10000`)
+   - **funct3:** `101` (for SRL)
+   - **rs1:** `r11` (`01011`)
+   - **rs2:** `r2` (`00010`)
+   - **funct7:** `0000000`
+   - **Binary Encoding:** `0000000 00010 01011 101 10000 0110011`
+
+### 10. **BNE r0, r1, 20** (B-type)
+   - **Opcode:** `1100011` (B-type)
+   - **imm[12|10:5]:** `0000010` (High bits of the immediate, `00010`)
+   - **rs2:** `r1` (`00001`)
+   - **rs1:** `r0` (`00000`)
+   - **funct3:** `001` (for BNE)
+   - **imm[4:1|11]:** `00010` (Low bits of the immediate, `00100` for 20)
+   - **Binary Encoding:** `0000010 00001 00000 001 00010 1100011`
+
+### 11. **BEQ r0, r0, 15** (B-type)
+   - **Opcode:** `1100011` (B-type)
+   - **imm[12|10:5]:** `0000001` (High bits of the immediate, `00001`)
+   - **rs2:** `r0` (`00000`)
+   - **rs1:** `r0` (`00000`)
+   - **funct3:** `000` (for BEQ)
+   - **imm[4:1|11]:** `11110` (Low bits of the immediate, `01110` for 15)
+   - **Binary Encoding:** `0000001 00000 00000 000 11110 1100011`
+
+### 12. **LW r13, r11, 2** (I-type)
+   - **Opcode:** `0000011` (I-type)
+   - **rd:** `r13` (`01101`)
+   - **funct3:** `010` (for LW)
+   - **rs1:** `r11` (`01011`)
+   - **imm[11:0]:** `000000000010` (Immediate value = 2)
+   - **Binary Encoding:** `000000000010 01011 010 01101 0000011`
+
+### 13. **SLL r15, r11, r2** (R-type)
+   - **Opcode:** `0110011` (R-type)
+   - **rd:** `r15` (`01111`)
+   - **funct3:** `001` (for SLL)
+   - **rs1:** `r11` (`01011`)
+   - **rs2:** `r2` (`00010`)
+   - **funct7:** `0000000`
+   - **Binary Encoding:** `0000000 00010 01011 001 01111 0110011`
 
 </details>
