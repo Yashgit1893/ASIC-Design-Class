@@ -138,7 +138,6 @@ Note :
 
 RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction set architecture (ISA) based on established principles of RISC. The RISC-V ISA has a small number of instruction formats, making it relatively simple to understand and implement. The primary instruction formats in RISC-V are **R-type, I-type, S-type, B-type, U-type,** and **J-type**. Each format is designed for different types of operations and encodes different information in the instruction's 32 bits.
 
-Here’s the revised version with the instruction formats listed in the requested format:
 
 ### 1. **R-type (Register)**
 - **Explanation:**
@@ -227,8 +226,6 @@ Here’s the revised version with the instruction formats listed in the requeste
 </p>
 
 ## Explanation of the subfields :
-
-Certainly! Here's a concise explanation of each field:
 
 ### Immediate (`imm`)
 A variable-length field embedded in instructions, representing a constant value. It's used directly as an operand or offset in various operations, such as arithmetic, memory access, and branching. The size and location differ across instruction formats, with some requiring sign extension.
