@@ -261,6 +261,27 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
  LW r13, r11, 2
  SLL r15, r11, r2
 ```
+
+The RISC-V ISA , Hardcoded ISA and Instruction format of the given instructions.
+
+
+| Operation | RISC-V ISA | Hardcoded ISA | Instruction Format |
+|-----------|------------|---------------|---------------------|
+| ADD r5, r6, r7 | 0x00730333 | 0x02308300 | R-type |
+| SUB r7, r5, r6 | 0x406283b3 | 0x02098380 | R-type |
+| AND r6, r5, r7 | 0x0072f333 | 0x0230a300 | R-type |
+| OR r8, r6, r5 | 0x0052e433 | 0x02513400 | R-type |
+| XOR r8, r5, r4 | 0x0042c433 | 0x02409400 | R-type |
+| SLT r10, r2, r4 | 0x0041a533 | 0x02402500 | R-type |
+| ADDI r12, r3, 5 | 0x00518613 | 0x03103600 | I-type |
+| SW r3, r1, 4 | 0x0031a223 | 0x02101200 | S-type |
+| SRL r16, r11, r2 | 0x002d9833 | 0x0258b800 | R-type |
+| BNE r0, r1, 20 | 0x00100e63 | 0x01000e00 | B-type |
+| BEQ r0, r0, 15 | 0x00f00763 | 0x00f00700 | B-type |
+| LW r13, r11, 2 | 0x002d8693 | 0x025b6600 | I-type |
+| SLL r15, r11, r2 | 0x002d97b3 | 0x025b7700 | R-type |
+
+
 ### Analyzing the instructions
 
 
