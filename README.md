@@ -128,3 +128,12 @@ Note :
 1. lui stands for Load Upper Immediate, operates on the higher 16 bits and addi (Add Immediate) performs addition between the immediate value and the contents of the source register, then places the result into the destination register.
 
 </details>
+
+
+<details>
+<summary>LAB 1: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
+
+
+Output for sum from 1 to 15 is shown.
+
+</details>
