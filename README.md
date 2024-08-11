@@ -243,4 +243,26 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
 - **`rs1` and `rs2`:** Source registers providing operands for an operation.
 - **`rd`:** The destination register where the result is stored. These fields are central to operations across RISC-V formats, ensuring consistent and efficient register access.
 
+
+## Instructions given
+
+
+```markdown
+| S.no. | Operation   | RISC-V ISA    | Hardcoded ISA | Instruction Format |
+|-------|-------------|---------------|---------------|--------------------|
+| 1     | ADD r8, r9, r10  | 32'h00A482B3 | 32'h02208300  | R-type             |
+| 2     | SUB r10, r8, r9  | 32'h409482B3 | 32'h02209380  | R-type             |
+| 3     | AND r9, r8, r10  | 32'h00A4C2B3 | 32'h0230A400  | R-type             |
+| 4     | OR r8, r9, r5    | 32'h005482B3 | 32'h02513480  | R-type             |
+| 5     | XOR r8, r8, r4   | 32'h004482B3 | 32'h0240C500  | R-type             |
+| 6     | SLT r00, r1, r4  | 32'h004002B3 | 32'h02415580  | R-type             |
+| 7     | ADDI r02, r2, 5  | 32'h00510113 | 32'h00520600  | I-type             |
+| 8     | SW r2, r0, 4     | 32'h00412023 | 32'h00209181  | S-type             |
+| 9     | SRL r06, r01, r1 | 32'h00119533 | 32'h00271803  | R-type             |
+| 10    | BNE r0, r0, 20   | 32'h01400063 | 32'h01409002  | B-type             |
+| 11    | BEQ r0, r0, 15   | 32'h00F00063 | 32'h00F00002  | B-type             |
+| 12    | LW r03, r01, 2   | 32'h00210183 | 32'h00208681  | I-type             |
+| 13    | SLL r05, r01, r1 | 32'h00109533 | 32'h00208783  | R-type             |
+```
+
 </details>
