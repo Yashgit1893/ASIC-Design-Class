@@ -132,7 +132,10 @@ Note :
 
 <details>
 <summary>LAB 4: RISC-V Instructions</summary>
+  
 # RISC-V instructions
+
+
 RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction set architecture (ISA) based on established principles of RISC. The RISC-V ISA has a small number of instruction formats, making it relatively simple to understand and implement. The primary instruction formats in RISC-V are **R-type, I-type, S-type, B-type, U-type,** and **J-type**. Each format is designed for different types of operations and encodes different information in the instruction's 32 bits.
 
 Here’s the revised version with the instruction formats listed in the requested format:
@@ -219,6 +222,28 @@ Here’s the revised version with the instruction formats listed in the requeste
   - **imm[11] (1 bit):** Immediate value (bit 11).
   - **imm[19:12] (8 bits):** Immediate value (bits 19-12).
 
+<p align="left">
+  <img width="750" alt="1" src="https://github.com/user-attachments/assets/d5232af0-8c4e-4fe8-9aa9-7fc77967a66b">
+</p>
 
+## Explanation of the subfields :
+
+Certainly! Here's a concise explanation of each field:
+
+### Immediate (`imm`)
+A variable-length field embedded in instructions, representing a constant value. It's used directly as an operand or offset in various operations, such as arithmetic, memory access, and branching. The size and location differ across instruction formats, with some requiring sign extension.
+
+### `funct7`
+A 7-bit function code that specifies the operation variant within R-type instructions. It works with `opcode` and `funct3` to differentiate operations sharing the same basic function, like distinguishing between `add` and `sub`.
+
+### `funct3`
+A 3-bit field that further refines the operation specified by the `opcode`. It is used across multiple instruction formats (R-type, I-type, etc.) to indicate specific operations or conditions, such as arithmetic functions, memory operations, or branch types.
+
+### `opcode`
+A 7-bit field that identifies the general operation category (e.g., arithmetic, load/store, branch). It forms the basis for instruction decoding and works with `funct3` and `funct7` to determine the specific operation.
+
+### Register Specifiers (`rs1`, `rs2`, `rd`)
+- **`rs1` and `rs2`:** Source registers providing operands for an operation.
+- **`rd`:** The destination register where the result is stored. These fields are central to operations across RISC-V formats, ensuring consistent and efficient register access.
 
 </details>
