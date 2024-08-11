@@ -132,10 +132,17 @@ Note :
 
 <details>
 <summary>LAB 4: RISC-V Instructions</summary>
+# RISC-V instructions
 RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction set architecture (ISA) based on established principles of RISC. The RISC-V ISA has a small number of instruction formats, making it relatively simple to understand and implement. The primary instruction formats in RISC-V are **R-type, I-type, S-type, B-type, U-type,** and **J-type**. Each format is designed for different types of operations and encodes different information in the instruction's 32 bits.
 
-### 1. R-type (Register)
-- **Used for:** Arithmetic and logical operations that involve two source registers and one destination register.
+Here’s the revised version with the instruction formats listed in the requested format:
+
+### 1. **R-type (Register)**
+- **Explanation:**
+  1. Used for arithmetic and logical operations involving two source registers and one destination register.
+  2. Allows complex operations like addition, subtraction, and bitwise operations.
+  3. Commonly used in ALU (Arithmetic Logic Unit) operations.
+
 - **Instruction format:**
   - **opcode (7 bits):** Operation code that specifies the instruction.
   - **rd (5 bits):** Destination register.
@@ -144,16 +151,12 @@ RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction se
   - **rs2 (5 bits):** Second source register.
   - **funct7 (7 bits):** Additional function modifier; often used to extend the opcode.
 
-  **Structure:**
-  ```
-  [ funct7 | rs2 | rs1 | funct3 | rd | opcode ]
-    7 bits | 5 bits | 5 bits | 3 bits | 5 bits | 7 bits
-  ```
+### 2. **I-type (Immediate)**
+- **Explanation:**
+  1. Handles operations with one source register and an immediate (constant) value.
+  2. Used in load instructions, arithmetic with immediate values, and system calls.
+  3. Simplifies operations that require a constant operand.
 
-  **Example:** `add rd, rs1, rs2` - Adds the values in registers `rs1` and `rs2`, and stores the result in register `rd`.
-
-### 2. I-type (Immediate)
-- **Used for:** Operations that involve one register and an immediate value (a constant).
 - **Instruction format:**
   - **opcode (7 bits):** Operation code.
   - **rd (5 bits):** Destination register.
@@ -161,16 +164,12 @@ RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction se
   - **rs1 (5 bits):** Source register.
   - **imm[11:0] (12 bits):** Immediate value.
 
-  **Structure:**
-  ```
-  [ imm[11:0] | rs1 | funct3 | rd | opcode ]
-     12 bits | 5 bits | 3 bits | 5 bits | 7 bits
-  ```
+### 3. **S-type (Store)**
+- **Explanation:**
+  1. Facilitates storing data from a register into memory.
+  2. Combines a base address (from a register) with an offset to calculate the memory address.
+  3. Often used in conjunction with load instructions to manage memory.
 
-  **Example:** `addi rd, rs1, imm` - Adds the immediate value `imm` to the value in `rs1` and stores the result in `rd`.
-
-### 3. S-type (Store)
-- **Used for:** Store operations, where data from a register is stored into memory.
 - **Instruction format:**
   - **opcode (7 bits):** Operation code.
   - **imm[11:5] (7 bits):** Upper bits of the immediate value.
@@ -179,16 +178,12 @@ RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction se
   - **funct3 (3 bits):** Function modifier.
   - **imm[4:0] (5 bits):** Lower bits of the immediate value.
 
-  **Structure:**
-  ```
-  [ imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode ]
-      7 bits | 5 bits | 5 bits | 3 bits | 5 bits | 7 bits
-  ```
+### 4. **B-type (Branch)**
+- **Explanation:**
+  1. Used for conditional branching based on comparisons between two registers.
+  2. Helps in implementing control flow constructs like loops and conditional statements.
+  3. Modifies the program counter based on a branch condition.
 
-  **Example:** `sw rs2, imm(rs1)` - Stores the value in `rs2` into the memory address computed as `rs1 + imm`.
-
-### 4. B-type (Branch)
-- **Used for:** Conditional branching, where the program may jump to a different instruction based on a comparison.
 - **Instruction format:**
   - **opcode (7 bits):** Operation code.
   - **imm[12] (1 bit):** Immediate value (bit 12).
@@ -199,31 +194,23 @@ RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction se
   - **imm[4:1] (4 bits):** Immediate value (bits 4-1).
   - **imm[11] (1 bit):** Immediate value (bit 11).
 
-  **Structure:**
-  ```
-  [ imm[12] | imm[10:5] | rs2 | rs1 | funct3 | imm[4:1] | imm[11] | opcode ]
-     1 bit  |  6 bits  | 5 bits | 5 bits | 3 bits |  4 bits  |  1 bit  | 7 bits
-  ```
+### 5. **U-type (Upper Immediate)**
+- **Explanation:**
+  1. Used for loading a 20-bit immediate value into a register.
+  2. Commonly used for creating large constants or setting up addresses.
+  3. Essential for address calculation in conjunction with other instructions.
 
-  **Example:** `beq rs1, rs2, imm` - If `rs1` equals `rs2`, the program counter (PC) is updated to `PC + imm`, branching to a new instruction.
-
-### 5. U-type (Upper Immediate)
-- **Used for:** Operations that involve a 20-bit immediate value, typically used to load a large constant.
 - **Instruction format:**
   - **opcode (7 bits):** Operation code.
   - **rd (5 bits):** Destination register.
   - **imm[31:12] (20 bits):** Upper 20 bits of the immediate value.
 
-  **Structure:**
-  ```
-  [ imm[31:12] | rd | opcode ]
-     20 bits  | 5 bits | 7 bits
-  ```
+### 6. **J-type (Jump)**
+- **Explanation:**
+  1. Directly modifies the program counter to jump to a new instruction address.
+  2. Includes instructions like `jal` for jumping and linking return addresses.
+  3. Useful for function calls and handling program control flow.
 
-  **Example:** `lui rd, imm` - Loads the upper 20 bits of the immediate value into the destination register `rd`.
-
-### 6. J-type (Jump)
-- **Used for:** Jump operations, where the program counter is directly modified to jump to a different instruction address.
 - **Instruction format:**
   - **opcode (7 bits):** Operation code.
   - **rd (5 bits):** Destination register.
@@ -231,14 +218,6 @@ RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction se
   - **imm[10:1] (10 bits):** Immediate value (bits 10-1).
   - **imm[11] (1 bit):** Immediate value (bit 11).
   - **imm[19:12] (8 bits):** Immediate value (bits 19-12).
-
-  **Structure:**
-  ```
-  [ imm[20] | imm[10:1] | imm[11] | imm[19:12] | rd | opcode ]
-     1 bit  |  10 bits | 1 bit  |  8 bits  | 5 bits | 7 bits
-  ```
-
-  **Example:** `jal rd, imm` - Jumps to the address `PC + imm`, and stores the return address in `rd`.
 
 
 
