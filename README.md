@@ -404,6 +404,17 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
 <details>
 <summary>LAB 5: RISC-V ISA in the referenced verilog code and the output wave form.</summary>
 
+###Functional simulation
+
+1. ```iverilog  -0 dump iiitb_rv321.v iiitb_rv321_tb.v```
+2. ```./dump```
+3. ```gtkwave iiitb_rv321.vcd```
+
+<p align="left">
+  <img width="750" alt="image" src="https://github.com/user-attachments/assets/cd4f0277-00ae-4bcd-8752-2bd935b748ee">
+</p
+
+## Waveform :
 
 
 </details>
