@@ -439,6 +439,7 @@ Table
 
 ## Waveform : The output waveforms of the instructions in 5-satge pipeline architecture
 
+
 1. ```ADD R6, R2, R1```
 
 <p align="left">
