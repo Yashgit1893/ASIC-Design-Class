@@ -418,6 +418,7 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
   <img width="750" alt="image" src="https://github.com/user-attachments/assets/4d6b8494-d1fa-4a28-ac7a-9527b2e55165">
 </p
 
+Table
 
 | SI No. | Operation           | Standard RISC-V ISA | Hardcoded ISA |
 |--------|---------------------|---------------------|---------------|
