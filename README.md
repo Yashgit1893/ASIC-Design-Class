@@ -402,7 +402,7 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
 </details>
 
 <details>
-<summary>LAB 5: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
+<summary>LAB 5: RISC-V ISA in the referenced verilog code and the output wave form.</summary>
 
 
 
