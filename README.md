@@ -420,73 +420,74 @@ A 7-bit field that identifies the general operation category (e.g., arithmetic, 
 
 Table
 
-| SI No. | Operation           | Standard RISC-V ISA | Hardcoded ISA |
-|--------|---------------------|---------------------|---------------|
-| 1      | ADD R6, R2, R1       | 32'h00110333        | 32'h02208300  |
-| 2      | SUB R7, R1, R2       | 32'h40208b3         | 32'h0209380   |
-| 3      | AND R8, R1, R3       | 32'h0030f433        | 32'h0230a400  |
-| 4      | OR R9, R2, R5        | 32'h005164b3        | 32'h0513480   |
-| 5      | XOR R10, R1, R4      | 32'h0040c533        | 32'h0240c500  |
-| 6      | SLT R1, R2, R4       | 32'h0045a0b3        | 32'h0415580   |
-| 7      | ADDI R12, R4, 5      | 32'h00412b3         | 32'h0520600   |
-| 8      | BEQ R0, R0, 15       | 32'h0000f63         | 32'h0f00002   |
-| 9      | SW R3, R1, 2         | 32'h0030a123        | 32'h0209181   |
-| 10     | LW R13, R1, 2        | 32'h020a683         | 32'h0208681   |
-| 11     | SRL R16, R14, R2     | 32'h030a123         | 32'h0271803   |
-| 12     | SLL R15, R1, R2      | 32'h02097b3         | 32'h0208783   |
+| S. No. | Operation         | Standard RISCV ISA | Hardcoded ISA   |
+|--------|-------------------|--------------------|-----------------|
+| 1      | ADD R6, R2, R1    | 32'h00110333       | 32'h02208300    |
+| 2      | SUB R7, R1, R2    | 32'h402083b3       | 32'h02209380    |
+| 3      | AND R8, R1, R3    | 32'h0030f433       | 32'h0230a400    |
+| 4      | OR R9, R2, R5     | 32'h005164b3       | 32'h02513480    |
+| 5      | XOR R10, R1, R4   | 32'h0040c533       | 32'h0240c500    |
+| 6      | SLT R1, R2, R4    | 32'h0045a0b3       | 32'h02415580    |
+| 7      | ADDI R12, R4, 5   | 32'h004120b3       | 32'h00520600    |
+| 8      | BEQ R0, R0, 15    | 32'h00000f63       | 32'h00f00002    |
+| 9      | SW R3, R1, 2      | 32'h0030a123       | 32'h00209181    |
+| 10     | LW R13, R1, 2     | 32'h0020a683       | 32'h00208681    |
+| 11     | SRL R16, R14, R2  | 32'h0030a123       | 32'h00271803    |
+| 12     | SLL R15, R1, R2   | 32'h002097b3       | 32'h00208783    |
+
 
 
 
 ## Waveform : The output waveforms of the instructions in 5-satge pipeline architecture
 
 
-1. ```ADD R6, R2, R1```
+```1. ADD R6, R2, R1```
 <p align="left">
   <img width="843" alt="image" src="https://github.com/user-attachments/assets/1e7945e3-63f2-47e6-970a-a14a25970e2e">
 
 </p
 
-2. ```SUB R7, R1, R2```
+```2. SUB R7, R1, R2```
 <p align="left">
  <img width="843" alt="image" src="https://github.com/user-attachments/assets/91d4e37b-9fca-477e-a2cc-4bece753dc47">
 </p
 
-3.  ```AND R8, R1, R3```
+```3.  AND R8, R1, R3```
 <p align="left">
  <img width="843" alt="image" src="https://github.com/user-attachments/assets/87d256f1-ded3-416e-9e66-54703a0056a9">
 </p
 
-4.  ```OR R9, R2, R5```
+```4.  OR R9, R2, R5```
 <p align="left">
  <img width="839" alt="image" src="https://github.com/user-attachments/assets/39a8905c-1172-4e78-bdc9-b3e494aa57e1">
 </p
 
-5.  ```XOR R10, R1, R4```
+```5.  XOR R10, R1, R4```
 <p align="left">
  <img width="839" alt="image" src="https://github.com/user-attachments/assets/05773ea3-530b-4d0c-bb21-687d11efb3fb">
 </p
 
-6.  ```SLT R1, R2, R4```
+```6.  SLT R1, R2, R4```
 <p align="left">
  <img width="842" alt="image" src="https://github.com/user-attachments/assets/669f782f-01ef-410e-9f2b-e43aa8a36c47">
 </p
 
-7.  ```ADDI R12, R4, 5```
+```7.  ADDI R12, R4, 5```
 <p align="left">
  <img width="842" alt="image" src="https://github.com/user-attachments/assets/f4745a6d-d3ac-42e7-9101-579d1611dfa7">
 </p
 
-8.  ```BEQ R0, R0, 15```
+```8.  BEQ R0, R0, 15```
 <p align="left">
  <img width="839" alt="image" src="https://github.com/user-attachments/assets/c7cbfcd9-aa85-4b3f-9c8d-eb1d86077220">
 </p
 
-9.  ```SW R3, R1, 2```
+```9.  SW R3, R1, 2```
 <p align="left">
  <img width="841" alt="image" src="https://github.com/user-attachments/assets/ec9cc5a7-de58-426d-8bd2-1200ab73e565">
 </p
 
-10.  ```LW R13, R1, 2```
+```10.  LW R13, R1, 2```
 <p align="left">
   <img width="842" alt="image" src="https://github.com/user-attachments/assets/cf23cb17-89f3-403e-a047-296951dfd068">
 </p>
