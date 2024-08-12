@@ -287,12 +287,12 @@ The RISC-V ISA , Hardcoded ISA and Instruction format of the given instructions.
 
 ### 1. **ADD r5, r6, r7** (R-type)
    - **Opcode:** `0110011` (R-type)
-   - **rd:** `r5` (`00001`)
+   - **rd:** `r5` (`00101`)
    - **funct3:** `000` (for ADD)
    - **rs1:** `r6` (`00110`)
    - **rs2:** `r7` (`00111`)
    - **funct7:** `0000000`
-   - **Binary Encoding:** `0000000 00111 00110 000 00001 0110011`
+   - **Binary Encoding:** `0000000 00111 00110 000 00101 0110011`
 
 ### 2. **SUB r7, r5, r6** (R-type)
    - **Opcode:** `0110011` (R-type)
@@ -401,3 +401,11 @@ The RISC-V ISA , Hardcoded ISA and Instruction format of the given instructions.
    - **Binary Encoding:** `0000000 00010 01011 001 01111 0110011`
 
 </details>
+
+<details>
+<summary>LAB 5: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
+
+
+
+</details>
+
