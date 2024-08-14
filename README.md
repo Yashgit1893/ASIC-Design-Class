@@ -500,20 +500,39 @@ Table
 
 The GCD using the Euclidean algorithm is a highly efficient method for computing the greatest common divisor of two integers. Based on the principle that the GCD of two numbers also divides their difference, this algorithm repeatedly replaces the larger number with the remainder of dividing the two numbers until one of them becomes zero. The other number, at this point, is the GCD. This approach significantly reduces the size of the numbers involved, making it particularly effective for large integers. The Euclidean algorithm's time complexity of \(O(\log(\min(a, b)))\) ensures rapid computation, and its straightforward iterative process makes it a popular choice for calculating the GCD in various applications.
 
-`EuclidMax.c` is the file containing code to calculate the sum from 1 to n.
+`EuclidMax.c` is the file containing code to calculate the GCD using Euclidean Algorithm.
 
 <p align="left">
-  <img width="750" alt="1" src="https://github.com/user-attachments/assets/c03a8f66-e356-447a-815a-be940fdeec59">
+ <img width="842" alt="image" src="https://github.com/user-attachments/assets/4b5ce89e-3308-42ab-b0a6-752e3d6d476b">
 </p>
 
-Compiling the code using GCC compiler :
-compiling the `sum1ton.c` with `gcc sum1ton.c` and run the executable file `./a.out`
+### Compiling the code using GCC compiler :
+
+compiling the `EuclidMax.c` with `gcc EuclidMax.c` and run the executable file `./a.out`
 
 <p align="left">
-  <img width="750" alt="2" src="https://github.com/user-attachments/assets/9512912e-08f9-4a01-8950-b18ee442cfa4">
+ <img width="839" alt="image" src="https://github.com/user-attachments/assets/ef180b23-f69d-4d3f-8133-574fd6dfb88f">
 </p>
 
-Output for sum from 1 to 15 is shown.
+Output for GCD of numbers 48 and 18 is 6, shown in the above image.
+
+### Compiling the code using RISC-V compiler :
+
+compiling the `EuclidMax.c` using the commands :
+
+```bash
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o EuclidMax.o EuclidMax.c
+```
+
+```bash
+spike pk EuclidMax.o
+```
+
+<p align="left">
+  <img width="842" alt="image" src="https://github.com/user-attachments/assets/8a806c4a-fa75-4ea7-84d6-f87d76d8e7af">
+</p>
+
+Output for the GCD of 48 and 18 using Euclidean Algorithm is same in both GCC compiler and RISC-V compiler.
 
 </details>
 
