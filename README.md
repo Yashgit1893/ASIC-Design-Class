@@ -493,7 +493,27 @@ Table
 </p>
 
 
+</details>
 
+<details>
+<summary>LAB 6:EuclidMax : GCD using Euclidean Algorithm</summary>
+
+The GCD using the Euclidean algorithm is a highly efficient method for computing the greatest common divisor of two integers. Based on the principle that the GCD of two numbers also divides their difference, this algorithm repeatedly replaces the larger number with the remainder of dividing the two numbers until one of them becomes zero. The other number, at this point, is the GCD. This approach significantly reduces the size of the numbers involved, making it particularly effective for large integers. The Euclidean algorithm's time complexity of \(O(\log(\min(a, b)))\) ensures rapid computation, and its straightforward iterative process makes it a popular choice for calculating the GCD in various applications.
+
+`EuclidMax.c` is the file containing code to calculate the sum from 1 to n.
+
+<p align="left">
+  <img width="750" alt="1" src="https://github.com/user-attachments/assets/c03a8f66-e356-447a-815a-be940fdeec59">
+</p>
+
+Compiling the code using GCC compiler :
+compiling the `sum1ton.c` with `gcc sum1ton.c` and run the executable file `./a.out`
+
+<p align="left">
+  <img width="750" alt="2" src="https://github.com/user-attachments/assets/9512912e-08f9-4a01-8950-b18ee442cfa4">
+</p>
+
+Output for sum from 1 to 15 is shown.
 
 </details>
 
