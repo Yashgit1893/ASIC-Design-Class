@@ -496,7 +496,9 @@ Table
 </details>
 
 <details>
-<summary>LAB 6:EuclidMax : GCD using Euclidean Algorithm</summary>
+<summary> LAB 6 : EuclidMax : GCD using Euclidean Algorithm</summary>
+
+# EuclidMax : GCD using Euclidean Algorithm
 
 The GCD using the Euclidean algorithm is a highly efficient method for computing the greatest common divisor of two integers. Based on the principle that the GCD of two numbers also divides their difference, this algorithm repeatedly replaces the larger number with the remainder of dividing the two numbers until one of them becomes zero. The other number, at this point, is the GCD. This approach significantly reduces the size of the numbers involved, making it particularly effective for large integers. The Euclidean algorithm's time complexity of \(O(\log(\min(a, b)))\) ensures rapid computation, and its straightforward iterative process makes it a popular choice for calculating the GCD in various applications.
 
