@@ -538,3 +538,48 @@ Output for the GCD of 48 and 18 using Euclidean Algorithm is same in both GCC co
 
 </details>
 
+<details>
+<summary> LAB 7 : Digital logic with TL-verilog and Makerchip </summary>
+
+TL-Verilog simplifies digital circuit design by eliminating legacy Verilog features and introducing a streamlined syntax with powerful constructs for pipelines and transactions. Makerchip, a cloud-based platform, accepts TL-Verilog code and automatically generates logical diagrams and waveforms without needing an external testbench. This section discusses TL-Verilog, the Makerchip platform, and provides relevant examples.
+
+<p align="left">
+  <img width="750" alt="image" src="https://github.com/user-attachments/assets/cd0edb1c-487f-4e65-be74-f0daedced905">
+</p>
+
+<p align="left">
+  <img width="750" alt="image" src="https://github.com/user-attachments/assets/a413128f-62a4-404a-bf58-2308486431fa">
+</p>
+
+1. Inverter
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/8de60122-a6bc-40fa-a388-7480b0ad61ff">
+</p>
+
+2.  2-input AND gate
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/c248e879-c607-4b2f-ba55-dbfc041d39ff">
+</p>
+
+3. 2-input OR gate
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/eff64204-5128-4437-ba9e-68c9df228113">
+</p>
+
+4. 2:1 MUX
+
+<p align="left">
+  <img width="957" alt="image" src="https://github.com/user-attachments/assets/e7a33453-64d9-4351-a9a3-d180e91f43ff">
+</p>
+
+5. 2:1 MUX using vectors
+
+<p align="left">
+  <img width="958" alt="image" src="https://github.com/user-attachments/assets/b9267fe5-aee4-4998-9836-81e031babb70">
+</p>
+
+</details>
+
