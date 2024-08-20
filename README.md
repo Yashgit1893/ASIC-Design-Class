@@ -581,5 +581,24 @@ TL-Verilog simplifies digital circuit design by eliminating legacy Verilog featu
   <img width="958" alt="image" src="https://github.com/user-attachments/assets/b9267fe5-aee4-4998-9836-81e031babb70">
 </p>
 
+6. Basic calculator
+
+<p align="left">
+ <img width="958" alt="image" src="https://github.com/user-attachments/assets/666b432a-c7ec-4f69-98b3-6292738601ff">
+</p>
+
+7. Counter
+
+<p align="left">
+ <img width="959" alt="image" src="https://github.com/user-attachments/assets/6fbe6724-3bd9-4477-a207-c237fad038cb">
+</p>
+ 
+8. Sequencial counter
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/27158a8f-18ad-4f01-aa3c-a9f5d955573c">
+</p>
+
+
 </details>
 
