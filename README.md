@@ -632,7 +632,7 @@ In TL-Verilog, pipelined logic is efficiently modeled using pipeline constructs 
 3. Cycle calculator
 
 <p align="left">
-  <img width="957" alt="image" src="https://github.com/user-attachments/assets/f17831de-e254-4276-ab62-8f8f03851c72">
+  <img width="958" alt="image" src="https://github.com/user-attachments/assets/767acd23-de04-4c85-b1c1-fba7472f4ad3">
 </p>
 
 
