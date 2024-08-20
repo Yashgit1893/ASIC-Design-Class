@@ -541,6 +541,8 @@ Output for the GCD of 48 and 18 using Euclidean Algorithm is same in both GCC co
 <details>
 <summary> LAB 7 : Digital logic with TL-verilog and Makerchip </summary>
 
+## Day 3
+
 TL-Verilog simplifies digital circuit design by eliminating legacy Verilog features and introducing a streamlined syntax with powerful constructs for pipelines and transactions. Makerchip, a cloud-based platform, accepts TL-Verilog code and automatically generates logical diagrams and waveforms without needing an external testbench. This section discusses TL-Verilog, the Makerchip platform, and provides relevant examples.
 
 <p align="left">
@@ -597,6 +599,40 @@ TL-Verilog simplifies digital circuit design by eliminating legacy Verilog featu
 
 <p align="left">
   <img width="959" alt="image" src="https://github.com/user-attachments/assets/27158a8f-18ad-4f01-aa3c-a9f5d955573c">
+</p>
+
+9. Fibonacci series
+
+<p align="left">
+  <img width="955" alt="image" src="https://github.com/user-attachments/assets/f9fa4a16-b385-42c1-b3e1-12d807d81c12">
+</p>
+
+### Pipelined logic
+
+In TL-Verilog, pipelined logic is efficiently modeled using pipeline constructs that represent data flow across design stages, each linked to a clock cycle. This approach simplifies sequential logic by automating state propagation and enabling clear, concise descriptions of multi-stage operations. By focusing on transaction flow, TL-Verilog enhances design clarity, maintainability, and verification, making it easier to manage complex digital designs.
+
+
+<p align="left">
+  <img width="813" alt="image" src="https://github.com/user-attachments/assets/5f15225a-1eb8-48d3-b3c8-e94e608f0538">
+</p>
+
+1. Pipenlined design
+
+
+<p align="left">
+  <img width="954" alt="image" src="https://github.com/user-attachments/assets/a97f64b6-6fe8-4ec0-befc-12a47575fa24">
+</p>
+
+2. Pipelined calculator
+
+<p align="left">
+  <img width="957" alt="image" src="https://github.com/user-attachments/assets/f17831de-e254-4276-ab62-8f8f03851c72">
+</p>
+
+3. Cycle calculator
+
+<p align="left">
+  <img width="957" alt="image" src="https://github.com/user-attachments/assets/f17831de-e254-4276-ab62-8f8f03851c72">
 </p>
 
 
