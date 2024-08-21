@@ -668,7 +668,7 @@ The functional specification of a processor is referred to  the term architectur
 3. Decode
 
 <p align="left">
-  <img width="959" alt="image" src="https://github.com/user-attachments/assets/f3ff5f35-6887-40cf-a8a6-f7bcfea37622">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/89f69b4b-f028-408c-bc76-3b5a4c1414c6">
 </p>
 
 3.a 
