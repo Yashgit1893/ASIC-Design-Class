@@ -763,24 +763,10 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
    m4_makerchip_module   // (Expanded in Nav-TLV pane.)
 \TLV
 
-   // /====================\
-   // | Sum 1 to 9 Program |
-   // \====================/
-   //
-   // Program for MYTH Workshop to test RV32I
-   // Add 1,2,3,...,9 (in that order).
-   //
-   // Regs:
-   //  r10 (a0): In: 0, Out: final sum
-   //  r12 (a2): 10
-   //  r13 (a3): 1..10
-   //  r14 (a4): Sum
-   // 
-   // External to function:
    m4_asm(ADD, r10, r0, r0)             // Initialize r10 (a0) to 0.
    // Function:
    m4_asm(ADD, r14, r10, r0)            // Initialize sum register a4 with 0x0
-   m4_asm(ADDI, r12, r10, 1010)         // Store count of 10 in register a2.
+   m4_asm(ADDI, r12, r10, 1011)         // Store count of 10 in register a2.
    m4_asm(ADD, r13, r10, r0)            // Initialize intermediate sum register a3 with 0
    // Loop:
    m4_asm(ADD, r14, r13, r14)           // Incremental addition
@@ -788,6 +774,8 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
    m4_asm(BLT, r13, r12, 1111111111000) // If a3 is less than a2, branch to label named <loop>
    m4_asm(ADD, r10, r14, r0)            // Store final result to register a0 so that it can be read by main program
    
+   //m4_asm(SW, r0, r10 ,100)
+   //m4_asm(LW, r15, r0, 100)
    // Optional:
    // m4_asm(JAL, r7, 00000000000000000000) // Done. Jump to itself (infinite loop). (Up to 20-bit signed immediate plus implicit 0 bit (unlike JALR) provides byte address; last immediate bit should also be 0)
    m4_define_hier(['M4_IMEM'], M4_NUM_INSTRS)
@@ -795,24 +783,33 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
    |cpu
       @0
          $reset = *reset;
+         
          $clk_yas = *clk;
+         //$pc[31:0] = >>1$reset ? 0 : ( >>1$pc + 32'h4 );
+         
          $pc[31:0] = >>1$reset ? 32'b0 :
-            >>1$taken_branch ? >>1$br_target_pc :
-            >>1$pc + 32'd4;
+                     >>1$taken_branch ? >>1$br_target_pc :
+                     >>1$pc + 32'd4;
+         
          $imem_rd_en = >>1$reset ? 0 : 1;
          $imem_rd_addr[31:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
       @1
          $instr[31:0] = $imem_rd_data[31:0];
-         $is_i_instr = $instr[6:2] ==? 5'b0000x ||
-              $instr[6:2] ==? 5'b001x0 ||
-              $instr[6:2] ==? 5'b11001;
-         $is_r_instr = $instr[6:2] ==? 5'b01011 ||
-              $instr[6:2] ==? 5'b011x0 ||
-              $instr[6:2] ==? 5'b10100;
+         
+         $is_i_instr = $instr[6:2] ==? 5'b0000x || $instr[6:2] ==? 5'b001x0 || $instr[6:2] ==? 5'b11001;
+         $is_r_instr = $instr[6:2] ==? 5'b01011 || $instr[6:2] ==? 5'b011x0 || $instr[6:2] ==? 5'b10100;
          $is_s_instr = $instr[6:2] ==? 5'b0100x;
          $is_b_instr = $instr[6:2] ==? 5'b11000;
          $is_j_instr = $instr[6:2] ==? 5'b11011;
          $is_u_instr = $instr[6:2] ==? 5'b0x101;
+         
+         $imm[31:0] = $is_i_instr ? {{21{$instr[31]}}, $instr[30:20]} :
+                      $is_s_instr ? {{21{$instr[31]}}, $instr[30:25], $instr[11:7]} :
+                      $is_b_instr ? {{20{$instr[31]}}, $instr[7], $instr[30:25], $instr[11:8], 1'b0} :
+                      $is_u_instr ? {$instr[31:12], 12'b0} :
+                      $is_j_instr ? {{12{$instr[31]}}, $instr[19:12], $instr[20], $instr[30:21], 1'b0} :
+                      32'b0;
+         
          $rs2_valid = $is_r_instr || $is_s_instr || $is_b_instr;
          ?$rs2_valid
             $rs2[4:0] = $instr[24:20];
@@ -832,10 +829,11 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
          $rd_valid = $is_r_instr || $is_i_instr || $is_u_instr || $is_j_instr;
          ?$rd_valid
             $rd[4:0] = $instr[11:7];
-
+            
          $opcode[6:0] = $instr[6:0];
          
          $dec_bits [10:0] = {$funct7[5], $funct3, $opcode};
+         
          $is_beq = $dec_bits ==? 11'bx_000_1100011;
          $is_bne = $dec_bits ==? 11'bx_001_1100011;
          $is_blt = $dec_bits ==? 11'bx_100_1100011;
@@ -846,16 +844,17 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
          $is_add = $dec_bits ==? 11'b0_000_0110011;
          
          $rf_rd_en1 = $rs1_valid;
-         $rf_rd_en2 = $rs2_valid;
          $rf_rd_index1[4:0] = $rs1;
+         $rf_rd_en2 = $rs2_valid;
          $rf_rd_index2[4:0] = $rs2;
          $src1_value[31:0] = $rf_rd_data1;
          $src2_value[31:0] = $rf_rd_data2;
          
+         
          $result[31:0] = $is_addi ? $src1_value + $imm :
                          $is_add ? $src1_value + $src2_value :
                          32'bx ;
-
+         
          $rf_wr_en = $rd_valid && $rd != 5'b0;
          $rf_wr_index[4:0] = $rd;
          $rf_wr_data[31:0] = $result;
@@ -866,23 +865,16 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
                          $is_blt ? (($src1_value < $src2_value) ^ ($src1_value[31] != $src2_value[31])):
                          $is_bge ? (($src1_value >= $src2_value) ^ ($src1_value[31] != $src2_value[31])):
                          $is_bltu ? ($src1_value < $src2_value):
-                         $is_bgeu ? ($src1_value >= $src2_value):1'b0;
-
+                         $is_bgeu ? ($src1_value >= $src2_value):
+                         1'b0;
          $br_target_pc[31:0] = $pc +$imm;
-
-      // YOUR CODE HERE
       
-      
-      // ...
-
-      // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
-      //       be sure to avoid having unassigned signals (which you might be using for random inputs)
-      //       other than those specifically expected in the labs. You'll get strange errors for these.
-
+   
    
    // Assert these to end simulation (before Makerchip cycle limit).
+   
    *passed = *cyc_cnt > 40;
-   *passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9) ;
+   *passed = |cpu/xreg[14]>>5$value == (1+2+3+4+5+6+7+8+9+10) ;
    *failed = 1'b0;
    
    // Macro instantiations for:
@@ -894,11 +886,25 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
       m4+imem(@1)    // Args: (read stage)
       m4+rf(@1, @1)  // Args: (read stage, write stage) - if equal, no register bypass is required
       //m4+dmem(@4)    // Args: (read/write stage)
-
+   
    m4+cpu_viz(@4)    // For visualisation, argument should be at least equal to the last stage of CPU logic. @4 would work for all labs.
 \SV
    endmodule
 ```
+
+clk
+
+<img width="527" alt="image" src="https://github.com/user-attachments/assets/94c0bbea-e074-4d8c-aae0-714fb6f85d70">
+
+Reset
+
+<img width="533" alt="image" src="https://github.com/user-attachments/assets/295180ae-3c70-4345-bdaf-196ecf49f2bc">
+
+Waveforms showing gradual addition from 1 to 9, that is from 0(h00) to 45(h2d):
+
+<p align="left">
+  <img width="530" alt="image" src="https://github.com/user-attachments/assets/11c46fc2-643b-4d7a-9a67-7641f1c8ad1f">
+</p>
 
 #### Testbench
 
@@ -1254,15 +1260,26 @@ The *passed signal checks if the sum of the values in register 14 after 5 stages
 
 <img width="897" alt="image" src="https://github.com/user-attachments/assets/aca2fdec-db4f-4bd9-87f0-344edc0b53f1">
 
+
+LOG
+
 <img width="527" alt="image" src="https://github.com/user-attachments/assets/27ae1307-eca7-47e1-936a-ae2520ad7667">
+
+CLC
 
 <img width="532" alt="image" src="https://github.com/user-attachments/assets/cffef344-9f78-4360-9374-8615b35c5fe3">
 
+Reset
+
 <img width="530" alt="image" src="https://github.com/user-attachments/assets/e7b8c947-e7c1-4b43-9c79-32bf04d35901">
+
+Increment of output from 0(h00) to 45(h2d):
 
 <p align="left">
   <img width="517" alt="image" src="https://github.com/user-attachments/assets/ad8d1832-aa1f-4e8c-8dd1-1a594a736e38">
 </p>
+
+VIZ
 
 <p align="left">
   <img width="399" alt="image" src="https://github.com/user-attachments/assets/2fdd3dc6-3a40-419b-baa9-2e2e42065899">
