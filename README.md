@@ -902,6 +902,8 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
 
 #### Testbench
 
+Checking the result in the log file
+
 <img width="556" alt="image" src="https://github.com/user-attachments/assets/a4e1113f-0287-4b6f-919e-e8f9b05cda39">
 
 
