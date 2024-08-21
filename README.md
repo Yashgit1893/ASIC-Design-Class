@@ -1260,10 +1260,13 @@ The *passed signal checks if the sum of the values in register 14 after 5 stages
 
 <img width="530" alt="image" src="https://github.com/user-attachments/assets/e7b8c947-e7c1-4b43-9c79-32bf04d35901">
 
-<img width="517" alt="image" src="https://github.com/user-attachments/assets/ad8d1832-aa1f-4e8c-8dd1-1a594a736e38">
+<p align="left">
+  <img width="517" alt="image" src="https://github.com/user-attachments/assets/ad8d1832-aa1f-4e8c-8dd1-1a594a736e38">
+</p>
 
-<img width="399" alt="image" src="https://github.com/user-attachments/assets/2fdd3dc6-3a40-419b-baa9-2e2e42065899">
-
+<p align="left">
+  <img width="399" alt="image" src="https://github.com/user-attachments/assets/2fdd3dc6-3a40-419b-baa9-2e2e42065899">
+</p>
 
 
 </details>
