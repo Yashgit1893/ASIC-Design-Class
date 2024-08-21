@@ -635,6 +635,60 @@ In TL-Verilog, pipelined logic is efficiently modeled using pipeline constructs 
   <img width="958" alt="image" src="https://github.com/user-attachments/assets/767acd23-de04-4c85-b1c1-fba7472f4ad3">
 </p>
 
+### Day 4
+
+#### RISC-V micro architecture
+
+The functional specification of a processor is referred to  the term architecture. It represents the capabilities that the programme can rely on from the hardware. Architecture does not describe how a processor is constructed. It describes what a processor is capable of. Micro-architecture, on the other hand, describes the construction and design of a processor. The number and size of caches, instruction cycle counts, pipeline length, and other parameters are defined by microarchitecture.
+
+<p align="left">
+  <img width="449" alt="image" src="https://github.com/user-attachments/assets/fee92f9b-9dd9-4209-b4dd-113c2aca64f2">
+</p>
+
+<p align="left">
+  <img width="462" alt="image" src="https://github.com/user-attachments/assets/5fcf7385-6a7b-4484-a714-8ecfab0f5314">
+</p>
+
+<p align="left">
+ <img width="959" alt="image" src="https://github.com/user-attachments/assets/f9d36ad1-70a0-47a9-ab80-a9be765dde40">
+</p>
+
+1. PC LAB
+
+<p align="left">
+ <img width="956" alt="image" src="https://github.com/user-attachments/assets/d2da0ff7-5742-432a-8ffa-6128775928bd">
+</p>
+
+2. Instruction fetch
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/f3ff5f35-6887-40cf-a8a6-f7bcfea37622">
+</p>
+
+3. Decode
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/f3ff5f35-6887-40cf-a8a6-f7bcfea37622">
+</p>
+
+3.a 
+
+<p align="left">
+ <img width="959" alt="image" src="https://github.com/user-attachments/assets/eb76d59c-5f94-4b95-a84c-d9f7b1db10a8">
+</p>
+
+
+3.b 
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/3c3f3d6b-1708-4a5f-b124-50ca2e2f9080">
+</p>
+
+3.c
+
+<p align="left">
+  <img width="959" alt="image" src="https://github.com/user-attachments/assets/3c3f3d6b-1708-4a5f-b124-50ca2e2f9080">
+</p>
 
 </details>
 
