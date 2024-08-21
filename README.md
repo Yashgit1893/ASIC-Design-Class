@@ -655,11 +655,14 @@ The functional specification of a processor is referred to  the term architectur
 
 1. PC LAB
 
+The Program Counter holds the address of the next instruction to execute, incrementing by 4 each time. On reset, it reinitializes to zero before continuing instruction execution.
 <p align="left">
  <img width="956" alt="image" src="https://github.com/user-attachments/assets/d2da0ff7-5742-432a-8ffa-6128775928bd">
 </p>
 
 2. Instruction fetch
+
+In a computer, the program counter (PC) holds the address of the next instruction to be fetched from the instruction memory (IM). The PC is incremented by 4 after each valid iteration. The instruction fetched from the IM is 32-bits wide and is used by the processor for execution during the fetch stage.
 
 <p align="left">
   <img width="959" alt="image" src="https://github.com/user-attachments/assets/f3ff5f35-6887-40cf-a8a6-f7bcfea37622">
@@ -667,28 +670,240 @@ The functional specification of a processor is referred to  the term architectur
 
 3. Decode
 
+
+The fetched 32-bit instruction is decoded to determine the operation, source, and destination addresses. Instructions are classified into 6 types: R, I, S, B, U, and J. The decoded instruction specifies the opcode, immediate value, and register addresses. The RISC-V ISA provides 32 registers, allowing 2 reads and 1 write simultaneously during the decode stage.
+
+<p align="left">
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/ba6f4bb6-fde8-4536-b630-828477401704">
+</p>
+
 <p align="left">
   <img width="959" alt="image" src="https://github.com/user-attachments/assets/89f69b4b-f028-408c-bc76-3b5a4c1414c6">
 </p>
 
-3.a 
+3.a Immediate Decode Logic
+
+<p align="left">
+ <img width="600" alt="image" src="https://github.com/user-attachments/assets/13c9bfc9-b494-4bb9-bc24-b29fdfcbbf04">
+</p>
+
 
 <p align="left">
  <img width="959" alt="image" src="https://github.com/user-attachments/assets/eb76d59c-5f94-4b95-a84c-d9f7b1db10a8">
 </p>
 
 
-3.b 
+3.b Decode logic for other fields like rs1,rs2,func3,func7
+
+<p align="left">
+  <img width="600" alt="image" src="https://github.com/user-attachments/assets/ede8dac8-8183-4388-970e-b41196593f82">
+</p>
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/74493771-5a0a-44e7-9cd0-acb7e1c4a176">
+
+
 
 <p align="left">
   <img width="959" alt="image" src="https://github.com/user-attachments/assets/3c3f3d6b-1708-4a5f-b124-50ca2e2f9080">
 </p>
 
-3.c
+3.c Decoding Individual Instruction
+
+<img width="327" alt="image" src="https://github.com/user-attachments/assets/9f0b2b41-c46a-4160-951c-ec0c7e6daf76">
+
 
 <p align="left">
-  <img width="959" alt="image" src="https://github.com/user-attachments/assets/3c3f3d6b-1708-4a5f-b124-50ca2e2f9080">
+  <img width="956" alt="image" src="https://github.com/user-attachments/assets/4d3a32d3-acbe-476d-aaf0-6bcce545d1fa">
 </p>
+
+4. Register file read and enable
+
+<img width="470" alt="image" src="https://github.com/user-attachments/assets/02cc379c-1192-4659-bf26-e122e849a866">
+
+
+<p align="left">
+ <img width="959" alt="image" src="https://github.com/user-attachments/assets/21b63825-f521-4c5f-916a-814361b182d3">
+</p>
+
+5. Arithmetic and logical unit
+
+<img width="482" alt="image" src="https://github.com/user-attachments/assets/12dbdfee-9b12-4376-9a90-fc267c0d56fa">
+
+
+<p align="left">
+ <img width="959" alt="image" src="https://github.com/user-attachments/assets/bcc0ef0f-cf12-4dfb-b7d0-605750fac35e">
+</p>
+
+6. Register File Write
+
+<img width="478" alt="image" src="https://github.com/user-attachments/assets/bdc14112-054a-433f-8b1f-094a47807998">
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/9ffbb81b-7708-4278-91b1-36d787d8f4b0">
+
+7. Branch Instruction
+
+<img width="548" alt="image" src="https://github.com/user-attachments/assets/fe24f274-8f9c-4f98-a4fd-ef293b219882">
+
+
+<p align="left">
+ <img width="959" alt="image" src="https://github.com/user-attachments/assets/e4909163-810e-40c6-b9fa-b48637eceb95">
+</p>
+
+
+#### complete code
+
+```bash
+\m4_TLV_version 1d: tl-x.org
+\SV
+   // This code can be found in: https://github.com/stevehoover/RISC-V_MYTH_Workshop
+   
+   m4_include_lib(['https://raw.githubusercontent.com/BalaDhinesh/RISC-V_MYTH_Workshop/master/tlv_lib/risc-v_shell_lib.tlv'])
+
+\SV
+   m4_makerchip_module   // (Expanded in Nav-TLV pane.)
+\TLV
+
+   // /====================\
+   // | Sum 1 to 9 Program |
+   // \====================/
+   //
+   // Program for MYTH Workshop to test RV32I
+   // Add 1,2,3,...,9 (in that order).
+   //
+   // Regs:
+   //  r10 (a0): In: 0, Out: final sum
+   //  r12 (a2): 10
+   //  r13 (a3): 1..10
+   //  r14 (a4): Sum
+   // 
+   // External to function:
+   m4_asm(ADD, r10, r0, r0)             // Initialize r10 (a0) to 0.
+   // Function:
+   m4_asm(ADD, r14, r10, r0)            // Initialize sum register a4 with 0x0
+   m4_asm(ADDI, r12, r10, 1010)         // Store count of 10 in register a2.
+   m4_asm(ADD, r13, r10, r0)            // Initialize intermediate sum register a3 with 0
+   // Loop:
+   m4_asm(ADD, r14, r13, r14)           // Incremental addition
+   m4_asm(ADDI, r13, r13, 1)            // Increment intermediate register by 1
+   m4_asm(BLT, r13, r12, 1111111111000) // If a3 is less than a2, branch to label named <loop>
+   m4_asm(ADD, r10, r14, r0)            // Store final result to register a0 so that it can be read by main program
+   
+   // Optional:
+   // m4_asm(JAL, r7, 00000000000000000000) // Done. Jump to itself (infinite loop). (Up to 20-bit signed immediate plus implicit 0 bit (unlike JALR) provides byte address; last immediate bit should also be 0)
+   m4_define_hier(['M4_IMEM'], M4_NUM_INSTRS)
+
+   |cpu
+      @0
+         $reset = *reset;
+         $clk_yas = *clk;
+         $pc[31:0] = >>1$reset ? 32'b0 :
+            >>1$taken_branch ? >>1$br_target_pc :
+            >>1$pc + 32'd4;
+         $imem_rd_en = >>1$reset ? 0 : 1;
+         $imem_rd_addr[31:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
+      @1
+         $instr[31:0] = $imem_rd_data[31:0];
+         $is_i_instr = $instr[6:2] ==? 5'b0000x ||
+              $instr[6:2] ==? 5'b001x0 ||
+              $instr[6:2] ==? 5'b11001;
+         $is_r_instr = $instr[6:2] ==? 5'b01011 ||
+              $instr[6:2] ==? 5'b011x0 ||
+              $instr[6:2] ==? 5'b10100;
+         $is_s_instr = $instr[6:2] ==? 5'b0100x;
+         $is_b_instr = $instr[6:2] ==? 5'b11000;
+         $is_j_instr = $instr[6:2] ==? 5'b11011;
+         $is_u_instr = $instr[6:2] ==? 5'b0x101;
+         $rs2_valid = $is_r_instr || $is_s_instr || $is_b_instr;
+         ?$rs2_valid
+            $rs2[4:0] = $instr[24:20];
+            
+         $rs1_valid = $is_r_instr || $is_i_instr || $is_s_instr || $is_b_instr;
+         ?$rs1_valid
+            $rs1[4:0] = $instr[19:15];
+         
+         $funct3_valid = $is_r_instr || $is_i_instr || $is_s_instr || $is_b_instr;
+         ?$funct3_valid
+            $funct3[2:0] = $instr[14:12];
+            
+         $funct7_valid = $is_r_instr ;
+         ?$funct7_valid
+            $funct7[6:0] = $instr[31:25];
+            
+         $rd_valid = $is_r_instr || $is_i_instr || $is_u_instr || $is_j_instr;
+         ?$rd_valid
+            $rd[4:0] = $instr[11:7];
+
+         $opcode[6:0] = $instr[6:0];
+         
+         $dec_bits [10:0] = {$funct7[5], $funct3, $opcode};
+         $is_beq = $dec_bits ==? 11'bx_000_1100011;
+         $is_bne = $dec_bits ==? 11'bx_001_1100011;
+         $is_blt = $dec_bits ==? 11'bx_100_1100011;
+         $is_bge = $dec_bits ==? 11'bx_101_1100011;
+         $is_bltu = $dec_bits ==? 11'bx_110_1100011;
+         $is_bgeu = $dec_bits ==? 11'bx_111_1100011;
+         $is_addi = $dec_bits ==? 11'bx_000_0010011;
+         $is_add = $dec_bits ==? 11'b0_000_0110011;
+         
+         $rf_rd_en1 = $rs1_valid;
+         $rf_rd_en2 = $rs2_valid;
+         $rf_rd_index1[4:0] = $rs1;
+         $rf_rd_index2[4:0] = $rs2;
+         $src1_value[31:0] = $rf_rd_data1;
+         $src2_value[31:0] = $rf_rd_data2;
+         
+         $result[31:0] = $is_addi ? $src1_value + $imm :
+                         $is_add ? $src1_value + $src2_value :
+                         32'bx ;
+
+         $rf_wr_en = $rd_valid && $rd != 5'b0;
+         $rf_wr_index[4:0] = $rd;
+         $rf_wr_data[31:0] = $result;
+         
+         
+         $taken_branch = $is_beq ? ($src1_value == $src2_value):
+                         $is_bne ? ($src1_value != $src2_value):
+                         $is_blt ? (($src1_value < $src2_value) ^ ($src1_value[31] != $src2_value[31])):
+                         $is_bge ? (($src1_value >= $src2_value) ^ ($src1_value[31] != $src2_value[31])):
+                         $is_bltu ? ($src1_value < $src2_value):
+                         $is_bgeu ? ($src1_value >= $src2_value):1'b0;
+
+         $br_target_pc[31:0] = $pc +$imm;
+
+      // YOUR CODE HERE
+      
+      
+      // ...
+
+      // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
+      //       be sure to avoid having unassigned signals (which you might be using for random inputs)
+      //       other than those specifically expected in the labs. You'll get strange errors for these.
+
+   
+   // Assert these to end simulation (before Makerchip cycle limit).
+   *passed = *cyc_cnt > 40;
+   *passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9) ;
+   *failed = 1'b0;
+   
+   // Macro instantiations for:
+   //  o instruction memory
+   //  o register file
+   //  o data memory
+   //  o CPU visualization
+   |cpu
+      m4+imem(@1)    // Args: (read stage)
+      m4+rf(@1, @1)  // Args: (read stage, write stage) - if equal, no register bypass is required
+      //m4+dmem(@4)    // Args: (read/write stage)
+
+   m4+cpu_viz(@4)    // For visualisation, argument should be at least equal to the last stage of CPU logic. @4 would work for all labs.
+\SV
+   endmodule
+```
+
+#### Testbench
+
+<img width="556" alt="image" src="https://github.com/user-attachments/assets/a4e1113f-0287-4b6f-919e-e8f9b05cda39">
+
 
 </details>
 
