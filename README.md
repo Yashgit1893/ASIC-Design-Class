@@ -894,6 +894,10 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
 
 #### Testbench
 
+```bash
+*passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9) ;
+```
+
 Checking the result in the log file
 
 <img width="556" alt="image" src="https://github.com/user-attachments/assets/a4e1113f-0287-4b6f-919e-e8f9b05cda39">
@@ -911,7 +915,7 @@ Reset
 Waveforms showing gradual addition from 1 to 9, that is from 0(h00) to 45(h2d):
 
 <p align="left">
-  <img width="530" alt="image" src="https://github.com/user-attachments/assets/11c46fc2-643b-4d7a-9a67-7641f1c8ad1f">
+  <img width="950" alt="image" src="https://github.com/user-attachments/assets/11c46fc2-643b-4d7a-9a67-7641f1c8ad1f">
 </p>
 
 
