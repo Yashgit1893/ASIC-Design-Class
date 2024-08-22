@@ -892,6 +892,14 @@ The fetched 32-bit instruction is decoded to determine the operation, source, an
    endmodule
 ```
 
+#### Testbench
+
+Checking the result in the log file
+
+<img width="556" alt="image" src="https://github.com/user-attachments/assets/a4e1113f-0287-4b6f-919e-e8f9b05cda39">
+
+#### Observation
+
 clk
 
 <img width="527" alt="image" src="https://github.com/user-attachments/assets/94c0bbea-e074-4d8c-aae0-714fb6f85d70">
@@ -906,11 +914,7 @@ Waveforms showing gradual addition from 1 to 9, that is from 0(h00) to 45(h2d):
   <img width="530" alt="image" src="https://github.com/user-attachments/assets/11c46fc2-643b-4d7a-9a67-7641f1c8ad1f">
 </p>
 
-#### Testbench
 
-Checking the result in the log file
-
-<img width="556" alt="image" src="https://github.com/user-attachments/assets/a4e1113f-0287-4b6f-919e-e8f9b05cda39">
 
 
 ## Day 5
