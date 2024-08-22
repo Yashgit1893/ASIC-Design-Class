@@ -539,7 +539,7 @@ Output for the GCD of 48 and 18 using Euclidean Algorithm is same in both GCC co
 </details>
 
 <details>
-<summary> LAB 7 : Digital logic with TL-verilog and Makerchip </summary>
+<summary> LAB 7 : Digital logic with TL-verilog and Makerchip, RISC-V microarchitecture and pipelined RISC-V microarchitecture </summary>
 
 ## Day 3
 
