@@ -1297,7 +1297,7 @@ VIZ
 </details>
 
 <details>
-<summary>LAB 10: TL Verilog to Verilog, simulation using a testbench and comparing GTK and Makerchip Output </summary>
+<summary>LAB 8: TL Verilog to Verilog, simulation using a testbench and comparing GTK and Makerchip Output </summary>
 
 # TL Verilog to Verilog, simulation using a testbench and comparing GTK and Makerchip Output
 
