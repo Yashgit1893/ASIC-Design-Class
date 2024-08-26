@@ -1415,19 +1415,19 @@ GTK wave Plots :
 1.clk_yas plot
 
 <p align="left">
-  <img width="900" alt="image" src="https://github.com/user-attachments/assets/961274cb-20f0-4dc4-8f15-b1d611bd9169">
+  <img width="1300" alt="image" src="https://github.com/user-attachments/assets/961274cb-20f0-4dc4-8f15-b1d611bd9169">
 </p>
 
 2. Reset  
 
 <p align="left">
-  <img width="900" alt="image" src="https://github.com/user-attachments/assets/097a91ec-fed9-445b-9d2e-b82a1f04cc30">
+  <img width="1300" alt="image" src="https://github.com/user-attachments/assets/097a91ec-fed9-445b-9d2e-b82a1f04cc30">
 </p>
 
 3. OUT[9:0] plot:
 
 <p align="left">
-  <img width="839" alt="image" src="https://github.com/user-attachments/assets/7e5662a5-fc65-4e92-a124-8307f91cad4c">
+  <img width="1300" alt="image" src="https://github.com/user-attachments/assets/7e5662a5-fc65-4e92-a124-8307f91cad4c">
 </p>
 
 
