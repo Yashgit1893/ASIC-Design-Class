@@ -1301,7 +1301,7 @@ VIZ
 
 # TL Verilog to Verilog, simulation using a testbench and comparing GTK and Makerchip Output
 
-The RISC-V processor was designed using TL-Verilog in the Makerchip IDE, a platform for digital circuit design. To implement it on an FPGA, the design was converted to standard Verilog using the Sandpiper-SaaS compiler. Pre-synthesis simulations were then conducted using the GTKWave simulator to verify the design's functionality before final synthesis and implementation on the FPGA.
+The RISC-V processor was initially designed using TL-Verilog in the Makerchip IDE, a platform tailored for digital circuit design and simulation. To implement it on an FPGA, the design was converted to standard Verilog using the Sandpiper-SaaS compiler, which is known for its efficient translation capabilities. Pre-synthesis simulations were subsequently conducted using the GTKWave simulator to thoroughly verify the design's functionality before final synthesis and implementation on the FPGA.
 
 Step by step commands :
 
