@@ -1296,3 +1296,159 @@ VIZ
 
 </details>
 
+<details>
+<summary>LAB 10: TL Verilog to Verilog, simulation using a testbench and comparing GTK and Makerchip Output </summary>
+
+# TL Verilog to Verilog, simulation using a testbench and comparing GTK and Makerchip Output
+
+The RISC-V processor was designed using TL-Verilog in the Makerchip IDE, a platform for digital circuit design. To implement it on an FPGA, the design was converted to standard Verilog using the Sandpiper-SaaS compiler. Pre-synthesis simulations were then conducted using the GTKWave simulator to verify the design's functionality before final synthesis and implementation on the FPGA.
+
+Step by step commands :
+
+```bash 
+$ sudo apt install make python python3 python3-pip git iverilog gtkwave
+```
+```bash
+$ cd ~
+```
+```bash
+$ sudo apt-get install python3-venv
+```
+```bash
+$ python3 -m venv .venv
+```
+```bash
+$ source ~/.venv/bin/activate
+```
+```bash
+$ pip3 install pyyaml click sandpiper-saas
+```
+
+<p align="left">
+  <img width="900" alt="image" src="https://github.com/user-attachments/assets/3b9ba5c0-a696-46f8-8821-01072bbacb1e">
+</p>
+
+Installing the packages required to run these set of commands in virtual environment:
+
+```bash
+$ sudo apt install make python python3 python3-pip git iverilog gtkwave docker.io
+```
+```bash
+$ sudo chmod 666 /var/run/docker.sock
+```
+```bash
+$ cd ~
+```
+```bash
+$ pip3 install pyyaml click sandpiper-saas
+```
+
+<p align="left">
+  <img width="841" alt="image" src="https://github.com/user-attachments/assets/638ac0d5-f2d2-45ee-ad40-f30d910f3f1a">
+</p>
+
+clone the repository in the required directory and make ```pre_synth_sim``` that will store the output
+
+```bash
+$ cd ~
+```
+```bash
+$ git clone https://github.com/manili/VSDBabySoC.git
+```
+```bash
+$ cd /home/vsduser/VSDBabySoC
+```
+```bash
+$ make pre_synth_sim
+```
+
+<p align="left">
+  <img width="841" alt="image" src="https://github.com/user-attachments/assets/638ac0d5-f2d2-45ee-ad40-f30d910f3f1a">
+</p>
+
+Replace the rvmyth.tlv file in the VSDBabySoC/src/module folder with our RISC-V design from the Makerchip .tlv file, and update the testbench to align with our Makerchip code.
+
+To generate the Verilog code from our TL-Verilog design and convert the .tlv definition of RISC-V into a .v definition, use the following code.
+
+
+```bash
+$ sandpiper-saas -i ./src/module/rvmyth.tlv -o rvmyth.v --bestsv --noline -p verilog --outdir ./src/module/
+```
+compile and simulate RISC-V design to run the code
+
+```bash
+$ iverilog -o output/pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module
+```
+
+<p align="left">
+  <img width="900" alt="image" src="https://github.com/user-attachments/assets/468ea3c6-a142-4310-a4a8-25f03f9b5245">
+</p>
+
+The Result of the simulation will be stored in the output/pre_synth_sim.
+
+```bash
+$ cd output
+```
+```bash
+$ ./pre_synth_sim.out
+```
+
+```bash
+$ gtkwave pre_synth_sim.vcd
+```
+
+<p align="left">
+  <img width="900" alt="image" src="https://github.com/user-attachments/assets/c61abf0c-284d-4e25-afc8-bde5c7512e69">
+</p>
+
+
+1.clk_yas: Clock input to the RISC-V core.
+
+2.reset: Input reset signal to the RISC-V core.
+
+3.OUT[9:0]: 10-bit output [9:0] OUT port of the RISC-V core. This port comes from the RISC-V register #14, originally.
+
+GTK wave Plots :
+
+1.clk_yas plot
+
+<p align="left">
+  <img width="900" alt="image" src="https://github.com/user-attachments/assets/961274cb-20f0-4dc4-8f15-b1d611bd9169">
+</p>
+
+2. Reset  
+
+<p align="left">
+  <img width="900" alt="image" src="https://github.com/user-attachments/assets/097a91ec-fed9-445b-9d2e-b82a1f04cc30">
+</p>
+
+3. OUT[9:0] plot:
+
+<p align="left">
+  <img width="839" alt="image" src="https://github.com/user-attachments/assets/7e5662a5-fc65-4e92-a124-8307f91cad4c">
+</p>
+
+
+Makerchip Plots :
+
+1.clk_yas plot
+
+<p align="left">
+  <img width="900" alt="image" src="https://github.com/user-attachments/assets/94c0bbea-e074-4d8c-aae0-714fb6f85d70">
+</p>
+
+2. Reset  
+
+<p align="left">
+  <img width="900" alt="image" src="https://github.com/user-attachments/assets/295180ae-3c70-4345-bdaf-196ecf49f2bc">
+</p>
+
+3. OUT[9:0] plot:
+
+<p align="left">
+  <img width="950" alt="image" src="https://github.com/user-attachments/assets/11c46fc2-643b-4d7a-9a67-7641f1c8ad1f">
+</p>
+
+</details>
+
+
