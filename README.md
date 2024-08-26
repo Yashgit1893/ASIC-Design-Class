@@ -1366,9 +1366,9 @@ $ make pre_synth_sim
   <img width="841" alt="image" src="https://github.com/user-attachments/assets/638ac0d5-f2d2-45ee-ad40-f30d910f3f1a">
 </p>
 
-Replace the rvmyth.tlv file in the VSDBabySoC/src/module folder with our RISC-V design from the Makerchip .tlv file, and update the testbench to align with our Makerchip code.
+Replace the rvmyth.tlv file in the VSDBabySoC/src/module folder with RISC-V design from the Makerchip .tlv file, and update the testbench to align with the Makerchip code.
 
-To generate the Verilog code from our TL-Verilog design and convert the .tlv definition of RISC-V into a .v definition, use the following code.
+To generate the Verilog code from TL-Verilog design and convert the .tlv definition of RISC-V into a .v definition, use the following code.
 
 
 ```bash
@@ -1392,6 +1392,8 @@ $ cd output
 ```bash
 $ ./pre_synth_sim.out
 ```
+
+Simualtion in GTK wave
 
 ```bash
 $ gtkwave pre_synth_sim.vcd
