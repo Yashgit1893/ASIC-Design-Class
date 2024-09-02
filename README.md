@@ -1453,4 +1453,78 @@ Makerchip Plots :
 
 </details>
 
+<details>
+<summary>LAB 9: Generate waveform for DAC and PLL peripheral for Risc-V processor.</summary>
+
+# Generate waveform for DAC and PLL peripheral for Risc-V processor.
+
+![Screenshot from 2024-09-02 17-44-54](https://github.com/user-attachments/assets/2cfb616a-7e3d-40d6-9540-151ad7c11eb9)
+
+The VSDBabySoC is a compact and robust System-on-Chip (SoC) built on the RISC-V architecture. Its primary objective is to integrate and test three open-source IP cores for the first time while fine-tuning the analog components. This SoC features the RVMYTH microprocessor, an 8x-PLL for generating a stable clock signal, and a 10-bit DAC designed to facilitate communication with other analog devices.
+
+#### BabySoC Simulation
+
+Developing and simulating the complete micro-architecture of a RISC-V CPU is a complex task. For this simulation, we'll focus on incorporating two key IP blocks: PLL and DAC.
+
+#### Phase-Locked Loop (PLL)
+
+A Phase-Locked Loop (PLL) is an electronic system designed to synchronize the phase and frequency of an output signal with a reference signal. It typically consists of three core components: a Phase Detector, which compares the phase of the reference signal with the output signal to generate an error signal; a Loop Filter, which smooths this error signal to reduce noise and enhance system stability; and a Voltage-Controlled Oscillator (VCO), which adjusts its output frequency based on the filtered error signal to minimize the phase difference. PLLs are widely utilized in various applications, including clock generation, frequency synthesis, and data recovery in communication systems.
+
+#### Digital-to-Analog Converter (DAC)
+
+A Digital-to-Analog Converter (DAC) transforms digital signals, typically in binary form, into analog signals like voltage or current. This conversion is vital for systems where digital data must be interpreted by analog devices or presented in a way that can be perceived by humans, such as in audio and video applications. DACs are extensively used in areas like audio playback, video display, and signal processing.
+
+#### step by step procedure
+
+1. Clone this repo: https://github.com/Subhasis-Sahu/BabySoC_Simulation.git using the following command.
+
+``` bash
+git clone https://github.com/Subhasis-Sahu/BabySoC_Simulation.git
+```
+```bash
+cd BabySoC_Simulation
+```
+![Screenshot from 2024-09-02 17-56-30](https://github.com/user-attachments/assets/40f3660b-c598-41a0-a025-3e4da9b64041)
+
+The folder is created after cloning the repo
+
+2. Replacing the rvymth.v file with the required rvymth.v.
+
+![Screenshot from 2024-09-02 17-58-15](https://github.com/user-attachments/assets/4aec49b0-8400-4cb3-b10d-85b86391cc15)
+
+![Screenshot from 2024-09-02 17-58-19](https://github.com/user-attachments/assets/d4b497dd-931c-42b6-890a-aed0b83e7a01)
+
+modify the vsdbabysoc.v file to point to our core clock.
+
+![Screenshot from 2024-09-02 17-59-27](https://github.com/user-attachments/assets/a816bb3c-c851-4ab4-973d-0ee7520fef45)
+
+Next following steps after making the above changes :
+
+```bash
+iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
+```
+![Screenshot from 2024-09-02 17-31-25](https://github.com/user-attachments/assets/a3cd7c1d-21e7-4835-90de-878a08671b5f)
+
+
+```bash
+./pre_synth_sim.out
+```
+
+![Screenshot from 2024-09-02 17-31-25](https://github.com/user-attachments/assets/f7b4afaf-d8a1-4cfe-83af-8f6a819a649c)
+
+
+3. open GTKwave
+
+![Screenshot from 2024-09-02 17-31-25](https://github.com/user-attachments/assets/dd3d611d-c26a-4002-946a-3040467b6716)
+
+
+#### waveforms
+
+![Screenshot from 2024-09-02 17-31-32](https://github.com/user-attachments/assets/169254e5-74e3-43d6-ae7c-727616228f64)
+
+
+simulation successfully demonstrates integration of DAC and PLL peripherals with the RISC-V processor, converting digital outputs to analog signals.
+
+</details>
+
 
