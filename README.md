@@ -1520,6 +1520,9 @@ iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/in
 
 #### waveforms
 
+![Screenshot from 2024-09-02 21-49-53](https://github.com/user-attachments/assets/4933492d-7f0a-4e07-9114-dcfdc7ee82ab)
+
+
 ![Screenshot from 2024-09-02 17-31-32](https://github.com/user-attachments/assets/169254e5-74e3-43d6-ae7c-727616228f64)
 
 
