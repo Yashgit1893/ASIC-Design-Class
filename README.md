@@ -1913,6 +1913,102 @@ show
 ```
 ![Screenshot from 2024-10-22 00-33-51](https://github.com/user-attachments/assets/ee825f56-e868-4fce-9521-a46d7254875b)
 
+#### Optimizations
+
+Example 1: mult_2.v
+
+verilog code
+
+![Screenshot from 2024-10-22 00-40-58](https://github.com/user-attachments/assets/96a03b5e-1f38-411e-bab8-4b7b02117621)
+
+Truth table
+
+![Screenshot from 2024-10-22 00-42-24](https://github.com/user-attachments/assets/e53f3ed4-4bdf-4181-aa5f-63d1004dda45)
+
+
+Multiplying a number by 2 doesn't require additional hardware; it can be achieved by appending zeros to the least significant bits (LSBs) while passing the remaining input bits directly to the output. This is done by grounding the LSBs and correctly wiring the input to the output.
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog mult_2.v
+
+synth -top mul2
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show 
+
+write_verilog -noattr mult_2_net.v
+
+!vim mult_2_net.v
+```
+
+Statistics
+
+![Screenshot from 2024-10-22 00-49-13](https://github.com/user-attachments/assets/7d57c81d-a628-4f17-9069-1290e67525a6)
+
+
+Realisation of logic
+
+![Screenshot from 2024-10-22 00-49-33](https://github.com/user-attachments/assets/8180839f-8469-4af1-b936-3f0cc08c4393)
+
+
+Netlist
+
+![Screenshot from 2024-10-22 00-49-52](https://github.com/user-attachments/assets/d5643d4d-ed8c-4b19-9c04-4109a2f1ea73)
+
+
+Example 2: mult_8.v
+
+verilog code
+
+![Screenshot from 2024-10-22 00-53-18](https://github.com/user-attachments/assets/08aa80ca-b2f4-4817-92f9-47abf9da34a5)
+
+
+Logic behaviour
+
+
+![Screenshot from 2024-10-22 00-53-40](https://github.com/user-attachments/assets/b1467bb3-8efc-4a37-97b9-5e20da48bbff)
+
+
+In this design, the 3-bit input number "a" is multiplied by 9, represented as (a9), which can be rewritten as (a8) + a. The term (a8) is equivalent to left-shifting "a" by three bits. Given a = a2 a1 a0, shifting left by three bits gives (a8) = a2 a1 a0 0 0 0. Therefore, (a9) = (a8) + a = a2 a1 a0 a2 a1 a0, effectively doubling "a" into a 6-bit number. Since this results in simply repeating the bits, no additional hardware is required. The synthesized netlist for this design is shown below.
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog mult_8.v
+
+synth -top mult8
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr mult_8_net.v
+
+!vim mult_8_net.v
+```
+Statistics
+
+![Screenshot from 2024-10-22 00-55-25](https://github.com/user-attachments/assets/52f653dd-1276-4468-9a35-92fcce5eb227)
+
+
+
+Realisation of logic
+
+![Screenshot from 2024-10-22 00-55-59](https://github.com/user-attachments/assets/24c5895a-3711-4e7d-9730-3c1d7a513ba6)
+
+netlist
+
+![Screenshot from 2024-10-22 00-57-19](https://github.com/user-attachments/assets/6b01ae2f-a776-4022-91fa-e7f6b75a85a1)
+
 
 
 </details>
