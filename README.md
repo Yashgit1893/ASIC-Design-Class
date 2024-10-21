@@ -1613,18 +1613,20 @@ Synthesis is the process of transforming an RTL (Register-Transfer Level) design
 ```bash
 Yosys
 ```
-![Screenshot from 2024-10-20 20-29-06](https://github.com/user-attachments/assets/83fefbf4-61e9-4190-a204-a8b2a5a787c5)
+
+![Screenshot from 2024-10-21 23-09-43](https://github.com/user-attachments/assets/f3d88c27-302f-4d40-b8a2-159ab3709862)
+
 
 ```bash
 read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 ```
-![Screenshot from 2024-10-20 20-29-28](https://github.com/user-attachments/assets/a3be62b9-fa6d-4e3c-9f3d-b4923d8fd663)
+![Screenshot from 2024-10-21 23-09-43](https://github.com/user-attachments/assets/f3d88c27-302f-4d40-b8a2-159ab3709862)
 
 
 ```bash
 read_verilog good_mux.v
 ```
-![Screenshot from 2024-10-20 20-29-06](https://github.com/user-attachments/assets/9ca88df0-c16a-4a78-ba25-f09cd4eec4e5)
+![Screenshot from 2024-10-21 23-09-43](https://github.com/user-attachments/assets/f3d88c27-302f-4d40-b8a2-159ab3709862)
 
 ```bash
 synth -top good_mux
@@ -1641,7 +1643,8 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 ```bash
 show
 ```
-![Screenshot from 2024-10-20 20-30-39](https://github.com/user-attachments/assets/303a1d53-4c7b-420a-a55f-e70e3afc7f20)
+![Screenshot from 2024-10-21 23-06-04](https://github.com/user-attachments/assets/3f2ec591-6226-4128-828f-0bbe4bb20e86)
+
 
 ```bash
 write_verilog -noattr good_mux_netlist.v
@@ -1653,6 +1656,7 @@ write_verilog -noattr good_mux_netlist.v
 
 
 ## Day 2
+
 
 
 
