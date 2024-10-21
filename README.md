@@ -2435,6 +2435,99 @@ iverilog dff_const5.v tb_dff_const5.v
 gtkwave tb_dff_const5.vcd
 ```
 
+![Screenshot from 2024-10-22 02-24-38](https://github.com/user-attachments/assets/7c031029-d9e2-4916-96d7-dea8f142d5be)
+
+Sequential Logic Optimizations for unused outputs
+
+Example 1:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 02-25-48](https://github.com/user-attachments/assets/70a95308-6057-4add-8f84-6174c8eacdf0)
+
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog counter_opt.v
+
+synth -top counter_opt
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr counter_opt_net.v
+```
+
+![Screenshot from 2024-10-22 02-28-19](https://github.com/user-attachments/assets/a28b3dab-5b21-48c2-ab0c-2372a722e845)
+
+
+![Screenshot from 2024-10-22 02-29-12](https://github.com/user-attachments/assets/d3f5c57b-01d3-4617-87ff-be2cf59fcf6d)
+
+```bash
+iverilog counter_opt.v tb_counter_opt.v
+
+./a.out
+
+gtkwave tb_counter_opt.vcd
+```
+![Screenshot from 2024-10-22 02-30-35](https://github.com/user-attachments/assets/babad388-92dd-47fc-a84e-8e44c1c2a47c)
+
+
+Modified counter logic:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 02-36-23](https://github.com/user-attachments/assets/3892632f-f1a6-4f3e-8b61-aec1be89a6db)
+
+
+```bash
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog counter_opt2.v
+synth -top counter_opt2
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+write_verilog -noattr counter_opt_net.v
+```
+
+![Screenshot from 2024-10-22 02-38-06](https://github.com/user-attachments/assets/64ad52bd-61ac-4518-9934-45c4fddbdd54)
+
+![Screenshot from 2024-10-22 02-39-50](https://github.com/user-attachments/assets/4fe68fbc-e282-4f7d-a501-2c86837d221f)
+
+
+```bash
+iverilog counter_opt2.v tb_counter_opt.v
+
+./a.out
+
+gtkwave tb_counter_opt.vcd
+```
+
+![Screenshot from 2024-10-22 02-46-08](https://github.com/user-attachments/assets/092eea60-cf5b-406b-9ca6-adfee5b4e667)
+
+
+
+
+## Day 4 : GLS, blocking vs non-blocking and Synthesis-Simulation mismatch.
+
+Introduction to GLS and Synthesis-Simulation mismatch :
+
+Gate Level Simulation (GLS) plays a crucial role in verifying digital circuits by simulating the synthesized netlist, which is a lower-level representation of the design. Using a testbench, GLS assesses the logical accuracy and timing behavior of the circuit. By comparing the simulation outputs to the expected results, GLS helps ensure that the synthesis process has not introduced errors and that the design meets its performance specifications.
+
+Sensitivity lists are essential for maintaining correct circuit behavior. An incomplete sensitivity list can lead to unintended latches. Additionally, blocking and non-blocking assignments in always blocks function differently, and improper use of blocking assignments can inadvertently create latches, resulting in discrepancies between synthesis and simulation. Therefore, it is vital to thoroughly review the circuit behavior and ensure that the sensitivity lists and assignments align with the intended functionality.
+
+![Screenshot from 2024-10-22 02-22-39](https://github.com/user-attachments/assets/45b981d4-65d2-4b50-9876-c31c57d7a116)
+
+
+
+
 
 </details>
 
