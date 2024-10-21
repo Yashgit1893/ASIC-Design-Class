@@ -1528,4 +1528,134 @@ simulation successfully demonstrates integration of DAC and PLL peripherals with
 
 </details>
 
+<details>
+<summary>LAB 1o: RTL Design using Verilog with Sky130 Technology</summary>
+
+## Day 1
+
+RTL (Register-Transfer Level) design models synchronous digital circuits by describing the flow of data between hardware registers and the logic operations applied to signals. Verilog is commonly used to create these high-level hardware descriptions. 
+
+To verify the design, simulation tools like Verilog are used. Simulators work by monitoring input signals, and when changes occur, the corresponding output signals are evaluated based on the design. The key to testing the design is the creation of a test bench, which applies stimulus (test vectors) to the circuit to ensure it behaves according to the specifications.
+
+After simulation, the results are saved in a VCD (Value Change Dump) file, which captures how the signals change over time. This VCD file can be loaded into GTKWave, a waveform viewer. GTKWave helps analyze signal interactions, timing relationships, and overall behavior of the circuit. By inspecting the waveforms, designers can debug and validate that the circuit is functioning as intended and meets the required design specifications.
+
+A test bench is a simulation environment used to verify the functionality of a digital circuit design. It applies input stimulus (test vectors) to the design and monitors the outputs to ensure the circuit behaves as expected. Test benches are written in the same hardware description language (e.g., Verilog) and are crucial for validating and debugging RTL designs.
+
+![Screenshot from 2024-10-21 12-17-11](https://github.com/user-attachments/assets/fd40d55c-7ed5-4783-aa0d-98268317f564)
+
+![Screenshot from 2024-10-21 12-17-28](https://github.com/user-attachments/assets/e1c8a5dd-b009-47cd-8d8c-f1aee9f97b53)
+
+#### Lab
+
+```bash
+mkdir ASIC
+cd ASIC
+```
+
+```bash
+git clone https://github.com/kunalg123/vsdflow.git
+git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+```
+
+![Screenshot from 2024-10-20 17-47-54](https://github.com/user-attachments/assets/9e3169be-0f44-4fcd-a70f-6c68520bd93c)
+
+My_Lib contains all the necessary library files.
+
+![Screenshot from 2024-10-21 12-24-28](https://github.com/user-attachments/assets/3ee5efab-776f-454f-87ed-306f9dd798bc)
+
+
+Simulation using iverilog simulator - 2:1 multiplexer rtl design
+
+Compile the verilog and testbench file usin the command :
+```bash
+iverilog good_mux.v tb_good_mux.v
+```
+![Screenshot from 2024-10-21 12-25-22](https://github.com/user-attachments/assets/af82c079-6528-4cd0-ab41-6ab2727203ff)
+
+GTK wave output
+
+```bash
+./a.out
+```
+```bash
+gtkwave tb_good_mux.vcd
+```
+
+![Screenshot from 2024-10-21 12-27-44](https://github.com/user-attachments/assets/295aa86f-d883-4900-8567-120e478d651a)
+
+To see the contents of the file :
+
+```bash
+vim tb_good_mux.v -o good_mux.v
+```
+![Screenshot from 2024-10-20 20-06-16](https://github.com/user-attachments/assets/881ebc82-be68-4e8d-8bd1-3a97ec755564)
+
+#### Yosys
+
+![Screenshot from 2024-10-21 12-30-56](https://github.com/user-attachments/assets/1459dde3-4425-4d21-b456-481238c9ee85)
+
+![Screenshot from 2024-10-21 12-31-14](https://github.com/user-attachments/assets/6c394c4c-b0da-4c34-9c9c-f41bcd82c25c)
+
+Synthesis is the process of transforming an RTL (Register-Transfer Level) design, described in a hardware description language like Verilog, into a gate-level representation. This gate-level representation is a netlist, which consists of interconnected logic gates. The steps in the synthesis process are as follows:
+
+1. **RTL to Gate-Level Translation**: The RTL design is translated into a netlist, which is a collection of logic gates and their connections. The netlist retains the same primary inputs and outputs as the RTL design, ensuring that the same test bench used for simulation can be reused to verify the synthesized design.
+
+2. **Liberty (.lib) File**: This file contains a library of logical modules, which include basic gates like AND, OR, and NOT. Each gate may have multiple variations (e.g., 2-input, 3-input gates) with different performance characteristics—some are optimized for speed (fast cells), while others for area or power efficiency (slow cells). The selection of these cells is crucial during synthesis, as it impacts the overall performance, power consumption, and area of the final design.
+
+   - **Fast Cells**: Used when high performance is required, but they consume more power and area. They help reduce cell delay by charging or discharging circuit capacitance faster using wider transistors.
+   
+   - **Slow Cells**: Used to address hold time violations and reduce power and area usage. However, they introduce higher delays due to slower capacitance charging.
+
+3. **Constraints**: A key aspect of synthesis is the use of constraint files. These files guide the synthesis tool in selecting the optimal mix of fast and slow cells based on the desired trade-offs between performance, power consumption, and area. Constraints help ensure that the synthesized design meets the specific timing and performance requirements.
+
+#### Below commands are for synthesis
+
+```bash
+Yosys
+```
+![Screenshot from 2024-10-20 20-29-06](https://github.com/user-attachments/assets/83fefbf4-61e9-4190-a204-a8b2a5a787c5)
+
+```bash
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+![Screenshot from 2024-10-20 20-29-28](https://github.com/user-attachments/assets/a3be62b9-fa6d-4e3c-9f3d-b4923d8fd663)
+
+
+```bash
+read_verilog good_mux.v
+```
+![Screenshot from 2024-10-20 20-29-06](https://github.com/user-attachments/assets/9ca88df0-c16a-4a78-ba25-f09cd4eec4e5)
+
+```bash
+synth -top good_mux
+```
+![Screenshot from 2024-10-20 20-29-28](https://github.com/user-attachments/assets/f85ae28f-4e65-4d86-b931-774979555a65)
+
+![Screenshot from 2024-10-20 20-29-40](https://github.com/user-attachments/assets/ff405a84-30b2-43b6-8505-712e646f6344)
+
+```bash
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+![Screenshot from 2024-10-20 20-30-17](https://github.com/user-attachments/assets/ab0b9972-8602-4b75-9ae5-46edf1818f5f)
+
+```bash
+show
+```
+![Screenshot from 2024-10-20 20-30-39](https://github.com/user-attachments/assets/303a1d53-4c7b-420a-a55f-e70e3afc7f20)
+
+```bash
+write_verilog -noattr good_mux_netlist.v
+```
+```bash
+!vim good_mux_netlist.v
+```
+![Screenshot from 2024-10-21 13-07-59](https://github.com/user-attachments/assets/c421d108-1fcd-4713-addd-24d61c15b3a2)
+
+
+## Day 2
+
+
+
+</details>
+
 
