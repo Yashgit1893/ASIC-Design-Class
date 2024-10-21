@@ -2010,6 +2010,243 @@ netlist
 ![Screenshot from 2024-10-22 00-57-19](https://github.com/user-attachments/assets/6b01ae2f-a776-4022-91fa-e7f6b75a85a1)
 
 
+## Day 3 
+
+There are two main types of optimizations: combinational and sequential, both aimed at creating designs that are efficient in terms of area, power, and performance. Combinational optimization involves techniques such as constant propagation, which is a direct optimization method, and Boolean logic optimization, which can be accomplished using tools like Karnaugh Maps (K-Maps) or the Quine-McCluskey method.
+
+Constant Propagation:
+
+Consider the below circuit:
+
+![Screenshot from 2024-10-22 01-14-38](https://github.com/user-attachments/assets/fae532d2-5429-4939-8718-0724d2f1a363)
+
+The top circuit uses 6 transistors (3 NMOS and 3 PMOS), while the bottom circuit uses 2 transistors (1 NMOS and 1 PMOS) when input A is set to zero, turning the logic into an inverter.
+
+Boolean Logic Optimisation:
+
+verilog code:
+
+```bash
+assign y = a?(b?c:(c?a:0)):(!c)
+```
+The ternary operator (?:) will make the circuit behave like a mux upon synthesis as shown below.
+
+![Screenshot from 2024-10-22 01-16-01](https://github.com/user-attachments/assets/66a5e4ae-5cba-44f0-9808-a57ebe236ca2)
+
+The circuit can be optimised as follows:
+
+![Screenshot from 2024-10-22 01-16-35](https://github.com/user-attachments/assets/fbb228d9-656d-4f21-9e1b-0fd0f1e4ffc4)
+
+
+Example 1:
+
+verilog code :
+
+![Screenshot from 2024-10-22 01-18-20](https://github.com/user-attachments/assets/872e2131-9766-4414-8360-acf3e479aa66)
+
+A multiplexer and since one of the inputs of the multiplexer is always connected to the ground it will infer an AND gate on optimisation
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog opt_check.v
+
+synth -top opt_check
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr opt_check_net.v
+
+!vim opt_check_net.v
+```
+
+![Screenshot from 2024-10-22 01-23-08](https://github.com/user-attachments/assets/a2e82dbd-826c-4af1-b5ec-56265817d569)
+
+
+![Screenshot from 2024-10-22 01-23-51](https://github.com/user-attachments/assets/3b40df22-bf7f-4878-8712-80d3acd53901)
+
+
+Example 2:
+
+Verilog code:
+
+Since one of the inputs of the multiplexer is always connected to the logic 1 it will infer an OR gate on optimisation.The OR gate will be NAND implementation since NOR gate has stacked pmos while NAND implementation has stacked nmos.
+
+
+![Screenshot from 2024-10-22 01-25-19](https://github.com/user-attachments/assets/ef2f840a-86ca-469c-942d-6faf3910bc2e)
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog opt_check2.v
+
+synth -top opt_check2
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr opt_check2_net.v
+
+!vim opt_check2_net.v
+```
+![Screenshot from 2024-10-22 01-28-13](https://github.com/user-attachments/assets/7830bcd7-c3fc-4e57-a1f5-ac08990b9dc6)
+
+![Screenshot from 2024-10-22 01-28-45](https://github.com/user-attachments/assets/df9af0b1-2f4c-46d0-9ee3-d1ddf2122819)
+
+
+Example 3:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 01-29-48](https://github.com/user-attachments/assets/103e7ef5-cb5a-45ff-8db6-e056bb1ecb21)
+
+
+On optimisation the above design becomes a 3 input AND gate
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog opt_check3.v
+
+synth -top opt_check3
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr opt_check3_net.v
+
+!vim opt_check3_net.v
+```
+
+![Screenshot from 2024-10-22 01-32-16](https://github.com/user-attachments/assets/b30a0b7b-ef6a-4536-ac11-9ce5a8d26618)
+
+![Screenshot from 2024-10-22 01-32-45](https://github.com/user-attachments/assets/a55cbe48-e3cd-4ad5-8d11-a67a5e0cc5de)
+
+
+
+Example 4:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 01-33-46](https://github.com/user-attachments/assets/67a72478-433c-4799-9289-64dc1f802802)
+
+
+On optimisation the above design becomes a 2 input XNOR gate.
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog opt_check4.v
+
+synth -top opt_check4
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr opt_check4_net.v
+
+!vim opt_check4_net.v
+```
+
+![Screenshot from 2024-10-22 01-35-27](https://github.com/user-attachments/assets/a0315ed3-84c2-425b-814c-8cc6ce5a978a)
+
+![Screenshot from 2024-10-22 01-35-49](https://github.com/user-attachments/assets/68ee9d28-40b4-45a9-970d-9339f6c2e33e)
+
+
+Example 5:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 01-38-03](https://github.com/user-attachments/assets/a8f3169d-5bb1-43ee-a0d7-f138b342e6e5)
+
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog multiple_module_opt.v
+
+synth -top multiple_module_opt
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+flatten
+
+show
+
+write_verilog -noattr multiple_module_opt_net.v
+
+!vim multiple_module_opt_net.v
+```
+
+![Screenshot from 2024-10-22 01-39-39](https://github.com/user-attachments/assets/946f8186-fcee-4628-a8ca-333905ccb2af)
+
+![Screenshot from 2024-10-22 01-39-57](https://github.com/user-attachments/assets/227dcb3d-37ac-4169-b79c-f9a95681be26)
+
+![Screenshot from 2024-10-22 01-40-53](https://github.com/user-attachments/assets/f4a87c96-ac6c-4bf8-a3c0-33d9e9334c6b)
+
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog multiple_module_opt2.v
+
+synth -top multiple_module_opt2
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+flatten
+
+show
+
+write_verilog -noattr multiple_module_opt2_net.v
+
+!vim multiple_module_opt_net2.v
+```
+
+![Screenshot from 2024-10-22 01-42-25](https://github.com/user-attachments/assets/194073a5-ca25-4c04-8a67-864dccdc5b30)
+
+
+![Screenshot from 2024-10-22 01-43-11](https://github.com/user-attachments/assets/d3a88344-ad8f-49cd-b14e-aaf664af1b39)
+
+
+Sequential Logic Optimizations
+
+Example 1:
+
+Verilog code:
+
+
+
+
 
 </details>
 
