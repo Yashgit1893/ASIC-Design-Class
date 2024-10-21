@@ -1657,6 +1657,142 @@ write_verilog -noattr good_mux_netlist.v
 
 ## Day 2
 
+Run the following commands :
+
+``` bash
+vim sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+![Screenshot from 2024-10-21 23-26-33](https://github.com/user-attachments/assets/f606929d-142b-4e13-911e-023c754a8b05)
+
+Cell library
+
+![Screenshot from 2024-10-21 23-31-05](https://github.com/user-attachments/assets/5c9b83dc-75b7-422c-bd22-38df9b36fd9e)
+
+![Screenshot from 2024-10-21 23-32-52](https://github.com/user-attachments/assets/6ca4b253-fafb-4c14-9317-200271fdcee5)
+
+![Screenshot from 2024-10-21 23-33-35](https://github.com/user-attachments/assets/37c8796f-9863-4949-8d56-0b6b9979759c)
+
+![Screenshot from 2024-10-21 23-33-48](https://github.com/user-attachments/assets/16fbe852-1702-4088-8a8e-cf8084cd5d7f)
+
+
+The timing data of standard cells is provided in the liberty format. Every .lib file will provide timing, power, noise, area information for a single corner ie process,voltage, temperature etc.
+
+Library : general information common to all cells in the library.
+Cell : specific information about each standard cell.
+Pin : Timing, power, capacitance, leakage functionality etc characteristics for each pin in each cell.
+
+and2_0 -- takes the least area, more delay and low power.
+
+and2_1 -- takes more area, less delay and high power.
+
+and2_2 -- takes the largest area, larger delay and highest power.
+
+
+#### Hierarchial synthesis vs Flat synthesis
+
+Hierarchial synthesis
+
+Hierarchical synthesis breaks a complex design into smaller sub-modules, which are synthesized individually to generate gate-level netlists before being integrated. This method improves organization, supports module reuse, and allows for incremental changes without affecting the entire design. In contrast, flat synthesis treats the entire design as one unit during synthesis, producing a single netlist without considering hierarchy. Although flat synthesis can optimize some designs, it lacks modular structure, making it harder to manage, analyze, and modify.
+
+```bash
+vim multiple_modules.v
+```
+
+![Screenshot from 2024-10-21 23-39-55](https://github.com/user-attachments/assets/5e51b660-6040-4225-b516-bbc054983a7e)
+
+![Screenshot from 2024-10-21 23-39-17](https://github.com/user-attachments/assets/5d515950-512d-42b3-ba35-b429b5b6ea1d)
+
+To perform hierarchical synthesis on the `multiple_modules.v` file use the following commands:
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog multiple_modules.v
+
+synth -top multiple_modules
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show multiple_modules
+
+write_verilog -noattr multiple_modules_hier.v
+
+!vim multiple_modules_hier.v
+```
+![Screenshot from 2024-10-21 23-42-01](https://github.com/user-attachments/assets/07dfdab3-0b5c-4cf8-bd3e-386568c2cf7d)
+
+![Screenshot from 2024-10-21 23-42-17](https://github.com/user-attachments/assets/7a45d8ad-edcf-4e0c-8631-1eb3989a541e)
+
+![Screenshot from 2024-10-21 23-42-29](https://github.com/user-attachments/assets/efb4b9b1-4f49-4a9e-b218-169509c52225)
+
+Realization of the Logic
+
+![Screenshot from 2024-10-21 23-42-56](https://github.com/user-attachments/assets/a4f43f6d-7bc3-4a3e-b01b-5375059f7bce)
+
+
+![Screenshot from 2024-10-21 23-43-26](https://github.com/user-attachments/assets/a4ca4ba0-7df5-48da-aa7e-9c3f3ea3aa9b)
+
+
+
+Flat synthesis
+
+To perform flat synthesis on the `multiple_modules.v` file type the following commands:
+
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog multiple_modules.v
+
+synth -top multiple_modules
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+flatten
+
+show
+
+write_verilog -noattr multiple_modules_flat.v
+
+!vim multiple_modules_flat.v
+```
+
+Realisation of logic
+
+![Screenshot from 2024-10-21 23-49-09](https://github.com/user-attachments/assets/b6080037-3a58-4951-a52b-2b0d523a49e5)
+
+netlist file
+
+![Screenshot from 2024-10-21 23-50-24](https://github.com/user-attachments/assets/10479dab-9ac9-4db1-9834-0fd59a98c469)
+
+
+Sub Module Level Synthesis
+
+This approach is ideal when a design includes multiple instances of the same module. The module is synthesized once and then replicated as needed, with the instances being connected in the top-level module. It leverages the divide-and-conquer strategy, simplifying design management and optimizing synthesis by reusing the same synthesized module.
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog multiple_modules.v
+
+synth -top sub_module1
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+```
+
+
+
+
+
+
 
 
 
