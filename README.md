@@ -1531,7 +1531,7 @@ simulation successfully demonstrates integration of DAC and PLL peripherals with
 <details>
 <summary>LAB 1o: RTL Design using Verilog with Sky130 Technology</summary>
 
-## Day 1
+## Day 1 : Introduction to Verilog RTL design and Synthesis.
 
 RTL (Register-Transfer Level) design models synchronous digital circuits by describing the flow of data between hardware registers and the logic operations applied to signals. Verilog is commonly used to create these high-level hardware descriptions. 
 
@@ -1655,7 +1655,7 @@ write_verilog -noattr good_mux_netlist.v
 ![Screenshot from 2024-10-21 13-07-59](https://github.com/user-attachments/assets/c421d108-1fcd-4713-addd-24d61c15b3a2)
 
 
-## Day 2
+## Day 2 : Timing libs, hierarchical vs flat synthesis and efficient flop coding styles .
 
 Run the following commands :
 
@@ -2010,7 +2010,7 @@ netlist
 ![Screenshot from 2024-10-22 00-57-19](https://github.com/user-attachments/assets/6b01ae2f-a776-4022-91fa-e7f6b75a85a1)
 
 
-## Day 3 
+## Day 3  : Combinational and Sequential Optimizations 
 
 There are two main types of optimizations: combinational and sequential, both aimed at creating designs that are efficient in terms of area, power, and performance. Combinational optimization involves techniques such as constant propagation, which is a direct optimization method, and Boolean logic optimization, which can be accomplished using tools like Karnaugh Maps (K-Maps) or the Quine-McCluskey method.
 
@@ -2526,7 +2526,153 @@ Sensitivity lists are essential for maintaining correct circuit behavior. An inc
 ![Screenshot from 2024-10-22 02-22-39](https://github.com/user-attachments/assets/45b981d4-65d2-4b50-9876-c31c57d7a116)
 
 
+GLS Simulation
 
+Example 1:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 02-48-56](https://github.com/user-attachments/assets/2c2a90e3-dab5-4389-bdde-ce689dcf9e7a)
+
+
+```bash
+iverilog ternary_operator_mux.v tb_ternary_operator_mux.v
+
+./a.out
+
+gtkwave tb_ternary_operator_mux.vcd
+```
+
+![Screenshot from 2024-10-22 02-50-18](https://github.com/user-attachments/assets/56cd8a98-5a7d-43e0-9df0-0fb398bc1a08)
+
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog ternary_operator_mux.v
+
+synth -top ternary_operator_mux
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr ternary_operator_mux_net.v
+```
+
+![Screenshot from 2024-10-22 02-52-19](https://github.com/user-attachments/assets/2c12c80d-1e94-4329-bc19-0c3d03cf894e)
+
+
+![Screenshot from 2024-10-22 02-53-00](https://github.com/user-attachments/assets/8dec6ddd-34af-469f-af63-4e3990609dc2)
+
+
+GLS:
+
+```bash
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v ternary_operator_mux_net.v tb_ternary_operator_mux.v
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+
+![Screenshot from 2024-10-22 02-57-52](https://github.com/user-attachments/assets/ae4ac0d9-7faa-48af-babe-935552b4cf66)
+
+
+no mismatch between the waveforms before and after synthesis
+
+Example 2:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 03-00-31](https://github.com/user-attachments/assets/6b856f3f-d1d2-485b-9d1c-3c222014bd93)
+
+
+```bash
+iverilog bad_mux.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+```
+
+![Screenshot from 2024-10-22 03-02-04](https://github.com/user-attachments/assets/57cb46ef-aa93-4fcf-8d25-09168c4170c1)
+
+
+```bash
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog bad_mux.v
+synth -top bad_mux
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr bad_mux_net.v
+```
+
+![Screenshot from 2024-10-22 03-03-13](https://github.com/user-attachments/assets/f0701e21-7e1d-46ba-9779-fcdbec38c156)
+
+
+![Screenshot from 2024-10-22 03-03-45](https://github.com/user-attachments/assets/638a7771-359b-4ef4-bb3a-29f1901f8dbd)
+
+GLS:
+
+```bash
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v bad_mux_net.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+```
+
+![Screenshot from 2024-10-22 03-05-16](https://github.com/user-attachments/assets/365e86fa-80c5-4419-a4d7-3ceb2dcaf383)
+
+
+
+There is a synthesis and simulation mismatch. 
+While performing synthesis yosys has corrected the sensitivity list error.
+
+
+Labs on Synthesis-Simulation mismatch for blocking statements
+
+Verilog code:
+
+![Screenshot from 2024-10-22 03-06-27](https://github.com/user-attachments/assets/782aef51-da02-42f2-9701-5302c3caa8a5)
+
+
+```bash
+iverilog blocking_caveat.v tb_blocking_caveat.v
+./a.out
+gtkwave tb_blocking_caveat.vcd
+```
+
+![Screenshot from 2024-10-22 03-08-15](https://github.com/user-attachments/assets/248f9f80-fc79-48e6-8164-884b3f3e4270)
+
+
+```bash
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog blocking_caveat.v
+synth -top blocking_caveat
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr blocking_caveat_net.v
+```
+
+![Screenshot from 2024-10-22 03-09-29](https://github.com/user-attachments/assets/8eea33d8-a94c-4776-9e30-e11de31ef7ad)
+
+
+![Screenshot from 2024-10-22 03-09-57](https://github.com/user-attachments/assets/594c33a0-b483-4c39-8d0e-2dbab42c878e)
+
+
+GLS
+
+```bash
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v blocking_caveat_net.v tb_blocking_caveat.v
+./a.out
+gtkwave tb_blocking_caveat.vcd
+```
+
+
+![Screenshot from 2024-10-22 03-11-58](https://github.com/user-attachments/assets/8aac684c-8df7-4625-a9be-285f31ae60b5)
+
+
+There is a synthesis and simulation mismatch. While performing synthesis yosys has corrected the latch error.
 
 
 </details>
