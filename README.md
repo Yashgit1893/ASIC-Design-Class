@@ -1688,9 +1688,9 @@ and2_1 -- takes more area, less delay and high power.
 and2_2 -- takes the largest area, larger delay and highest power.
 
 
-#### Hierarchial synthesis vs Flat synthesis
+## Hierarchial synthesis vs Flat synthesis
 
-Hierarchial synthesis
+#### Hierarchial synthesis
 
 Hierarchical synthesis breaks a complex design into smaller sub-modules, which are synthesized individually to generate gate-level netlists before being integrated. This method improves organization, supports module reuse, and allows for incremental changes without affecting the entire design. In contrast, flat synthesis treats the entire design as one unit during synthesis, producing a single netlist without considering hierarchy. Although flat synthesis can optimize some designs, it lacks modular structure, making it harder to manage, analyze, and modify.
 
@@ -1736,7 +1736,7 @@ Realization of the Logic
 
 
 
-Flat synthesis
+#### Flat synthesis
 
 To perform flat synthesis on the `multiple_modules.v` file type the following commands:
 
@@ -1770,7 +1770,7 @@ netlist file
 ![Screenshot from 2024-10-21 23-50-24](https://github.com/user-attachments/assets/10479dab-9ac9-4db1-9834-0fd59a98c469)
 
 
-Sub Module Level Synthesis
+#### Sub Module Level Synthesis
 
 This approach is ideal when a design includes multiple instances of the same module. The module is synthesized once and then replicated as needed, with the instances being connected in the top-level module. It leverages the divide-and-conquer strategy, simplifying design management and optimizing synthesis by reusing the same synthesized module.
 
@@ -1788,11 +1788,130 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 ```
 
+![Screenshot from 2024-10-21 23-58-00](https://github.com/user-attachments/assets/f839419c-1fbc-47c7-8bb8-4945f61a96de)
+
+![Screenshot from 2024-10-21 23-58-44](https://github.com/user-attachments/assets/6d431174-a5a7-4aa8-ba73-60b62bd1b185)
 
 
 
+#### Flop coding styles and optimization
+
+Flip-flops play a crucial role in sequential logic circuits, and their design and synthesis are explored here. To prevent glitches in digital circuits, flip-flops store intermediate values, ensuring that the inputs to combinational circuits stay stable until the clock edge. This prevents glitches and ensures proper operation by maintaining signal stability.
+
+Asynchronous Reset/set:
+
+Verilog Code for Asynchronous Reset:
+
+![Screenshot from 2024-10-22 00-08-57](https://github.com/user-attachments/assets/e7c3f6cb-2966-4c74-b357-5b4a015bdecb)
+
+Verilog Code for Asynchronous Reset:
+
+![Screenshot from 2024-10-22 00-09-32](https://github.com/user-attachments/assets/55857a08-73dc-403b-8579-60ccdd96b508)
+
+Synchronous Reset:
+
+![Screenshot from 2024-10-22 00-10-17](https://github.com/user-attachments/assets/29191662-d562-49e5-ae21-557686cda7c5)
 
 
+FLIP FLOP SIMULATION
+
+```bash
+iverilog dff_asyncres.v tb_dff_asyncres.v 
+
+ls
+
+./a.out
+
+gtkwave tb_dff_asyncres.vcd
+```
+![Screenshot from 2024-10-22 00-12-19](https://github.com/user-attachments/assets/ba0aff7f-9e68-4314-862a-844661a12e99)
+
+GTK WAVE OF ASYNCHRONOUS RESET
+
+![Screenshot from 2024-10-22 00-16-50](https://github.com/user-attachments/assets/8d4b162a-6495-45f8-9cc7-37303f426c04)
+
+GTK wave of Asyncrhonous set
+
+![Screenshot from 2024-10-22 00-21-58](https://github.com/user-attachments/assets/1c68252c-c7ea-4276-88da-b0bd7df494dd)
+
+
+GTK wave of synchronous reset
+
+![Screenshot from 2024-10-22 00-24-17](https://github.com/user-attachments/assets/8ac66a8c-c65a-4f8d-bdd7-68f27336573e)
+
+
+FLIP FLOP SYNTHESIS
+
+```bash
+
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog dff_asyncres.v
+
+synth -top dff_asyncres
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+```
+
+Statistics of D FLipflop with Asynchronous Reset
+
+![Screenshot from 2024-10-22 00-25-54](https://github.com/user-attachments/assets/2bee8f72-8cf6-44b6-b995-8a2da8bca2e7)
+
+
+Realization of Logic
+
+![Screenshot from 2024-10-22 00-26-36](https://github.com/user-attachments/assets/7ea059e3-6345-4f87-9595-04f4462b9486)
+
+We initially designed a flip-flop with an active-high reset, but it was behaving as if it had an active-low reset. To correct this, the tool inserted an inverter, making the reset signal `!(!(reset))`, which effectively returned it to an active-high reset. Ultimately, we ended up with the intended active-high reset for the flip-flop.
+
+
+Statistics of D FLipflop with Asynchronous set
+
+```bash
+
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog dff_async_set.v
+
+synth -top dff_async_set
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+```
+
+realisation of logic
+
+![Screenshot from 2024-10-22 00-33-37](https://github.com/user-attachments/assets/c3b41f46-74c8-4c78-989b-f9dcc6b3cd49)
+
+
+```bash
+
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog dff_syncres.v
+
+synth -top dff_syncres
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+```
+![Screenshot from 2024-10-22 00-33-51](https://github.com/user-attachments/assets/ee825f56-e868-4fce-9521-a46d7254875b)
 
 
 
