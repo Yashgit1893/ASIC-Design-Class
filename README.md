@@ -2244,8 +2244,196 @@ Example 1:
 
 Verilog code:
 
+![Screenshot from 2024-10-22 01-47-25](https://github.com/user-attachments/assets/2823a661-26c3-4801-bc7d-af7f3aab53cf)
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+  read_verilog dff_const1.v
+
+synth -top dff_const1
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr dff_const1_net.v
+
+!vim dff_const1_net.v
+```
+
+![Screenshot from 2024-10-22 01-49-10](https://github.com/user-attachments/assets/d24d6b92-c211-4783-95e8-706c4bbafd20)
+
+![Screenshot from 2024-10-22 01-49-38](https://github.com/user-attachments/assets/80af144a-7c65-498a-bbb8-53e0ad47962b)
 
 
+```bash
+iverilog dff_const1.v tb_dff_const1.v
+
+./a.out
+
+gtkwave tb_dff_const1.vcd
+```
+![Screenshot from 2024-10-22 01-52-12](https://github.com/user-attachments/assets/8c5297c5-a18c-4752-83d4-7e6f33618602)
+
+
+Example 2:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 01-53-07](https://github.com/user-attachments/assets/61a1631a-f17b-48f6-94a3-d88b776635d8)
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog dff_const2.v
+
+synth -top dff_const2
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr dff_const2_net.v
+
+!vim dff_const2_net.v
+```
+![Screenshot from 2024-10-22 01-55-05](https://github.com/user-attachments/assets/23085b25-5396-429c-8d4d-f4cb8e6d3eff)
+
+![Screenshot from 2024-10-22 01-55-26](https://github.com/user-attachments/assets/b1862c62-5b24-482f-8dbc-3d4dcf29dc1d)
+
+```bash
+iverilog dff_const2.v tb_dff_const2.v
+
+./a.out
+
+gtkwave tb_dff_const2.vcd
+```
+
+![Screenshot from 2024-10-22 01-57-05](https://github.com/user-attachments/assets/91c926b7-e564-4650-9a3f-195eebe84ae7)
+
+Example 3:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 01-58-20](https://github.com/user-attachments/assets/9b50f73b-02eb-4079-85a8-18215b505e9b)
+
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog dff_const3.v
+
+synth -top dff_const3
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr dff_const3_net.v
+```
+
+![Screenshot from 2024-10-22 01-59-50](https://github.com/user-attachments/assets/39178b26-26d4-4b4d-89c2-7f0f2342a5cb)
+
+![Screenshot from 2024-10-22 02-00-50](https://github.com/user-attachments/assets/1479ee6a-11e1-41b0-b490-450e29879e6a)
+
+```bash
+iverilog dff_const3.v tb_dff_const3.v
+
+./a.out
+
+gtkwave tb_dff_const3.vcd
+```
+
+![Screenshot from 2024-10-22 02-02-44](https://github.com/user-attachments/assets/958d0fa3-13a1-4b00-a948-7ed2cd98fb18)
+
+Example 4:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 02-03-22](https://github.com/user-attachments/assets/186589a1-3645-4bda-b2f1-14c8ec45b364)
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog dff_const4.v
+
+synth -top dff_const4
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr dff_const4_net.v
+```
+
+![Screenshot from 2024-10-22 02-04-43](https://github.com/user-attachments/assets/b5a5fe0a-ae77-4447-9bfa-590ba1fc3d31)
+
+![Screenshot from 2024-10-22 02-05-05](https://github.com/user-attachments/assets/1bad7e5e-b7ab-4110-ba1a-453b30304b5b)
+
+
+
+```bash
+iverilog dff_const4.v tb_dff_const4.v
+
+./a.out
+
+gtkwave tb_dff_const4.vcd
+```
+![Screenshot from 2024-10-22 02-06-37](https://github.com/user-attachments/assets/3e88e7f2-26b3-41f3-b89f-e2e2deeab8f1)
+
+
+Example 5:
+
+Verilog code:
+
+![Screenshot from 2024-10-22 02-07-43](https://github.com/user-attachments/assets/882cc4e8-d190-4865-9271-3fa5004d13b8)
+
+```bash
+yosys
+
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog dff_const5.v
+
+synth -top dff_const5
+
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+write_verilog -noattr dff_const5_net.v
+```
+![Screenshot from 2024-10-22 02-08-53](https://github.com/user-attachments/assets/c15d6597-bf08-4585-a2f5-1404c19f4a1f)
+
+![Screenshot from 2024-10-22 02-09-35](https://github.com/user-attachments/assets/69858709-ca81-41c8-af99-7b2c819283fd)
+
+
+```bash
+iverilog dff_const5.v tb_dff_const5.v
+
+./a.out
+
+gtkwave tb_dff_const5.vcd
+```
 
 
 </details>
