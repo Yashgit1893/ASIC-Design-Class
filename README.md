@@ -2678,3 +2678,31 @@ There is a synthesis and simulation mismatch. While performing synthesis yosys h
 </details>
 
 
+<details>
+<summary>LAB 11: Synthesize RISC-V and Compare Output with Functional Simulations</summary>
+
+## RTL Simulations :
+
+Run the following commands : 
+
+```bash
+cd BabySoC
+
+iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
+
+./pre_synth_sim.out
+
+gtkwave pre_synth_sim.vcd
+```
+
+20 cycles
+![Screenshot from 2024-10-24 01-18-25](https://github.com/user-attachments/assets/77c66d9d-0bf5-4974-b490-bdc5acb6e472)
+
+![Screenshot from 2024-10-24 01-19-10](https://github.com/user-attachments/assets/2136c8cf-e238-4125-943d-35c23be205c4)
+
+
+
+</details>
+
+
+
