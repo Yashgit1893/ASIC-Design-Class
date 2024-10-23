@@ -2681,26 +2681,6 @@ There is a synthesis and simulation mismatch. While performing synthesis yosys h
 <details>
 <summary>LAB 11: Synthesize RISC-V and Compare Output with Functional Simulations</summary>
 
-## RTL Simulations :
-
-Run the following commands : 
-
-```bash
-cd BabySoC
-
-iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
-
-./pre_synth_sim.out
-
-gtkwave pre_synth_sim.vcd
-```
-
-20 cycles
-![Screenshot from 2024-10-24 01-18-25](https://github.com/user-attachments/assets/77c66d9d-0bf5-4974-b490-bdc5acb6e472)
-
-![Screenshot from 2024-10-24 01-19-10](https://github.com/user-attachments/assets/2136c8cf-e238-4125-943d-35c23be205c4)
-
-
 ## Synthesizing RISC-V and comparing output with functional (RTL) simulation :
 
 Copy the src folder from the BabySoC folder to the sky130RTLDesignAndSynthesisWorkshop folder in the VLSI folder from previous lab.
@@ -2717,59 +2697,85 @@ Synthesis :
 Run the following commands
 
 ```bash
-yosys       
-
-read_liberty -lib /home/yash/VLSI/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 read_verilog clk_gate.v
-
 read_verilog rvmyth.v
-
 synth -top rvmyth
-
-abc -liberty /home/karthikeya/ysdh/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-
-write_verilog -noattr rvmyth_net.v
-
-exit
-
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+write_verilog -noattr rvmyth.v
+!gedit rvmyth.v
 ```
 
 snapshots :
 
-![Screenshot from 2024-10-24 01-38-40](https://github.com/user-attachments/assets/97777400-d9fd-44a7-9a30-8012c791e534)
+![Screenshot from 2024-10-24 03-52-06](https://github.com/user-attachments/assets/3719ba07-a824-4ae7-a877-e651739ef3c8)
 
-![Screenshot from 2024-10-24 01-45-25](https://github.com/user-attachments/assets/08a400d9-44f4-4c8a-8f0c-c2acd3461c03)
+![Screenshot from 2024-10-24 03-52-21](https://github.com/user-attachments/assets/f3d55a0a-83f4-4527-8c84-e2f581132667)
 
-![Screenshot from 2024-10-24 01-38-50](https://github.com/user-attachments/assets/2572e6c4-e55c-4677-a654-bbbfef58223e)
-
-![Screenshot from 2024-10-24 01-39-24](https://github.com/user-attachments/assets/dadf644c-ac8c-4e29-a733-04e8cd590375)
-
-![Screenshot from 2024-10-24 01-40-00](https://github.com/user-attachments/assets/af3348d6-4b7e-44b2-a9fe-c4d27455c4a3)
+![Screenshot from 2024-10-24 03-52-42](https://github.com/user-attachments/assets/98b9f39d-398e-4871-8ebd-f5fcf3d32a3e)
 
 
-![Screenshot from 2024-10-24 01-53-35](https://github.com/user-attachments/assets/023b0b3d-ef2d-4d79-9d79-525cfc96cb2d)
+```bash
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -lib ../lib/avsddac.lib
+read_liberty -lib ../lib/avsdpll.lib  
+read_verilog vsdbabysoc.v
+read_verilog rvmyth.v
+read_verilog clk_gate.v 
+synth -top vsdbabysoc
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr vsdbabysoc.synth.v
+```
+
+![Screenshot from 2024-10-24 04-07-52](https://github.com/user-attachments/assets/f177540a-4d29-41f0-8b6a-7d510098dcdb)
+
+![Screenshot from 2024-10-24 04-08-17](https://github.com/user-attachments/assets/c8a7c27b-0b4f-4b01-bc63-eab5e8116619)
+
+
+![Screenshot from 2024-10-24 04-13-36](https://github.com/user-attachments/assets/31ea97a0-0fa3-4163-98d8-80502cb9949d)
+
+
+
+![Screenshot from 2024-10-24 04-12-00](https://github.com/user-attachments/assets/41c83782-cf68-4fe9-8490-b4ace042a8b1)
 
 
 
 
-observing the output waveform of synthesised RISC-V : 
+observing the output waveform : 
 
 run the following commands :
 
 ```bash
 iverilog ../../my_lib/verilog_model/primitives.v ../../my_lib/verilog_model/sky130_fd_sc_hd.v rvmyth.v testbench.v vsdbabysoc.v avsddac.v avsdpll.v clk_gate.v
-
 ./a.out
-
 gtkwave dump.vcd
 ```
-![Screenshot from 2024-10-24 01-52-28](https://github.com/user-attachments/assets/b953343e-5957-4782-9232-16654d8135bf)
+![Screenshot from 2024-10-24 03-55-26](https://github.com/user-attachments/assets/d3c6ace0-0ee8-4151-be74-7eed2227b957)
 
-![Screenshot from 2024-10-24 01-49-32](https://github.com/user-attachments/assets/c817741e-3997-4e02-bab9-a1c48af245a2)
+![Screenshot from 2024-10-24 03-55-36](https://github.com/user-attachments/assets/94465caf-cd49-400c-a018-4c8e30389caa)
+
+![Screenshot from 2024-10-24 03-56-01](https://github.com/user-attachments/assets/5d0faa4e-00a3-4dad-a100-b40ce915b859)
 
 
-![Screenshot from 2024-10-24 01-49-52](https://github.com/user-attachments/assets/6aa4a657-9b8a-4bfa-b780-5cb4a3ebd59c)
 
+Functional Simulations
+
+```bash
+iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
+./pre_synth_sim.out
+gtkwave pre_synth_sim.vcd
+```
+
+![Screenshot from 2024-10-24 04-03-00](https://github.com/user-attachments/assets/3194ec1b-3a80-4986-930a-6f76969062f8)
+
+![Screenshot from 2024-10-24 04-04-31](https://github.com/user-attachments/assets/2a94e1be-9b03-4b51-b0b6-777112b6f678)
+
+![Screenshot from 2024-10-24 04-05-11](https://github.com/user-attachments/assets/8a3c5cec-ba7e-427a-9709-1ab02296a56d)
+
+we can see comparing both the outputs are same hence verifying our results.
 </details>
 
