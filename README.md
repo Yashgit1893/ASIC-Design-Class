@@ -2701,8 +2701,75 @@ gtkwave pre_synth_sim.vcd
 ![Screenshot from 2024-10-24 01-19-10](https://github.com/user-attachments/assets/2136c8cf-e238-4125-943d-35c23be205c4)
 
 
+## Synthesizing RISC-V and comparing output with functional (RTL) simulation :
+
+Copy the src folder from the BabySoC folder to the sky130RTLDesignAndSynthesisWorkshop folder in the VLSI folder from previous lab.
+
+go to the following directory:
+
+```bash
+cd /home/yash/VLSI/sky130RTLDesignAndSynthesisWorkshop/src/module
+
+```
+
+Synthesis : 
+
+Run the following commands
+
+```bash
+yosys       
+
+read_liberty -lib /home/yash/VLSI/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog clk_gate.v
+
+read_verilog rvmyth.v
+
+synth -top rvmyth
+
+abc -liberty /home/karthikeya/ysdh/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+write_verilog -noattr rvmyth_net.v
+
+exit
+
+```
+
+snapshots :
+
+![Screenshot from 2024-10-24 01-38-40](https://github.com/user-attachments/assets/97777400-d9fd-44a7-9a30-8012c791e534)
+
+![Screenshot from 2024-10-24 01-45-25](https://github.com/user-attachments/assets/08a400d9-44f4-4c8a-8f0c-c2acd3461c03)
+
+![Screenshot from 2024-10-24 01-38-50](https://github.com/user-attachments/assets/2572e6c4-e55c-4677-a654-bbbfef58223e)
+
+![Screenshot from 2024-10-24 01-39-24](https://github.com/user-attachments/assets/dadf644c-ac8c-4e29-a733-04e8cd590375)
+
+![Screenshot from 2024-10-24 01-40-00](https://github.com/user-attachments/assets/af3348d6-4b7e-44b2-a9fe-c4d27455c4a3)
+
+
+![Screenshot from 2024-10-24 01-53-35](https://github.com/user-attachments/assets/023b0b3d-ef2d-4d79-9d79-525cfc96cb2d)
+
+
+
+
+observing the output waveform of synthesised RISC-V : 
+
+run the following commands :
+
+```bash
+iverilog ../../my_lib/verilog_model/primitives.v ../../my_lib/verilog_model/sky130_fd_sc_hd.v rvmyth.v testbench.v vsdbabysoc.v avsddac.v avsdpll.v clk_gate.v
+
+./a.out
+
+gtkwave dump.vcd
+```
+![Screenshot from 2024-10-24 01-52-28](https://github.com/user-attachments/assets/b953343e-5957-4782-9232-16654d8135bf)
+
+![Screenshot from 2024-10-24 01-49-32](https://github.com/user-attachments/assets/c817741e-3997-4e02-bab9-a1c48af245a2)
+
+
+![Screenshot from 2024-10-24 01-49-52](https://github.com/user-attachments/assets/6aa4a657-9b8a-4bfa-b780-5cb4a3ebd59c)
 
 </details>
-
-
 
