@@ -2779,3 +2779,74 @@ gtkwave pre_synth_sim.vcd
 we can see comparing both the outputs are same hence verifying our results.
 </details>
 
+
+<details>
+<summary>LAB 12: Post Synthesis Static Timing Analysis using OpenSTA.</summary>
+
+#### Static Timing Analysis (STA)
+
+Static Timing Analysis (STA) is a method used to verify the timing performance of digital circuits without requiring dynamic simulations. By examining data paths from inputs to outputs, STA assesses whether a circuit meets specific timing constraints, accounting for delays through gates and interconnects. It detects setup and hold time violations, ensuring data stability around clock edges, and considers clock properties such as frequency, skew, and jitter. STA assumes worst-case delay conditions to confirm performance under diverse conditions. Tools like Synopsys PrimeTime and Cadence Tempus automate STA, enabling early detection of timing issues to ensure reliable circuit operation at the intended speeds.
+STA is vital in digital design for multiple reasons. It verifies that data signals propagate within defined time limits to produce valid outputs and identifies timing violations, ensuring reliable operation of flip-flops and other sequential components. STA also assists in performance optimization by pinpointing critical paths that limit the maximum operating frequency, allowing for early detection of timing issues and reducing the need for costly redesigns. Additionally, STA facilitates balancing performance with power efficiency by analyzing the power impact of clock frequency adjustments. Automated STA tools manage complex designs, accounting for variations in manufacturing, temperature, and voltage to ensure stable performance across conditions.
+
+
+#### Reg-to-Reg Path
+
+A reg-to-reg path links two sequential elements, such as flip-flops, within a digital circuit. This path is a primary focus in Static Timing Analysis (STA) as it verifies data transfer between registers through combinational logic, crucial for accurate synchronization, especially in pipelined or sequential designs. STA checks setup and hold time requirements along these paths to ensure data stability at the registers. It considers delays in the connecting combinational logic, with critical reg-to-reg paths influencing the circuit’s maximum achievable frequency. For registers in separate clock domains, STA also addresses factors like metastability and synchronization to maintain reliable operation.
+
+#### Clk-to-Reg Path
+
+A clk-to-reg path links a clock signal to a register, enabling the register to operate correctly with each clock edge. This path measures the delay for the clock signal to reach the register from its source, factoring in delays from buffers or routing. During setup analysis, the clk-to-reg path defines the timing requirement for data arrival at the register relative to the clock edge. Clock delay influences data capture timing, and both setup and hold timing are evaluated, especially in the presence of clock jitter or variations. For registers in different clock domains, additional considerations ensure reliable synchronization across domains.
+
+#### STA for synthesized Risc-V core using time period of 11.40 ns.
+
+To verify that our synthesized RISC-V Core module meets its timing constraints, we will generate setup and hold timing reports. These reports will confirm that data signals propagate correctly throughout the core. Run the following commands:
+
+```bash
+set PERIOD 11.40
+
+set_units -time ns
+
+create_clock [get_pins {pll/CLK}] -name clk -period $PERIOD
+set_clock_uncertainty -setup  [expr $PERIOD * 0.05] [get_clocks clk]
+set_clock_transition [expr $PERIOD * 0.05] [get_clocks clk]
+set_clock_uncertainty -hold [expr $PERIOD * 0.08] [get_clocks clk]
+set_input_transition [expr $PERIOD * 0.08] [get_ports ENb_CP]
+set_input_transition [expr $PERIOD * 0.08] [get_ports ENb_VCO]
+set_input_transition [expr $PERIOD * 0.08] [get_ports REF]
+set_input_transition [expr $PERIOD * 0.08] [get_ports VCO_IN]
+set_input_transition [expr $PERIOD * 0.08] [get_ports VREFH]
+```
+
+![4n](https://github.com/user-attachments/assets/e931c051-e592-4853-b5e3-85b9328d2827)
+
+
+Run the following commands :
+
+```bash
+cd VSDBabySoc/src
+sta
+read_liberty -min ./lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -min ./lib/avsdpll.lib
+read_liberty -min ./lib/avsddac.lib
+read_liberty -max ./lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -max ./lib/avsdpll.lib
+read_liberty -max ./lib/avsddac.lib
+read_verilog ../output/synth/vsdbabysoc.synth.v
+link_design vsdbabysoc
+read_sdc ./sdc/vsdbabysoc_synthesis.sdc
+report_checks -path_delay min_max -format full_clock_expanded -digits 4
+```
+
+Snapshots :
+
+![3n](https://github.com/user-attachments/assets/f2cf1b2e-5f9e-4eb7-bd9f-4232c37c45a3)
+
+Setup time :
+![2n](https://github.com/user-attachments/assets/0b87ef63-4aa0-4687-a3bb-0928c2bcb654)
+
+Hold time :
+![1n](https://github.com/user-attachments/assets/c7326b93-8d82-4b19-bb18-0c7ead1e6fd9)
+
+
+</details>
+
