@@ -2843,6 +2843,7 @@ Setup time :
 ![2n](https://github.com/user-attachments/assets/0b87ef63-4aa0-4687-a3bb-0928c2bcb654)
 
 Hold time :
+
 ![1n](https://github.com/user-attachments/assets/c7326b93-8d82-4b19-bb18-0c7ead1e6fd9)
 
 
