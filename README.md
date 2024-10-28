@@ -2817,8 +2817,6 @@ set_input_transition [expr $PERIOD * 0.08] [get_ports VCO_IN]
 set_input_transition [expr $PERIOD * 0.08] [get_ports VREFH]
 ```
 
-![4n](https://github.com/user-attachments/assets/e931c051-e592-4853-b5e3-85b9328d2827)
-
 
 Run the following commands :
 
