@@ -2842,9 +2842,15 @@ Snapshots :
 Setup time :
 ![2n](https://github.com/user-attachments/assets/0b87ef63-4aa0-4687-a3bb-0928c2bcb654)
 
+![image](https://github.com/user-attachments/assets/7cc27750-cef6-4c63-bdc2-8f544a240512)
+
+
 Hold time :
 
 ![1n](https://github.com/user-attachments/assets/c7326b93-8d82-4b19-bb18-0c7ead1e6fd9)
+
+![image](https://github.com/user-attachments/assets/e4d22e09-4b68-4bdb-96f2-b37df482b8d3)
+
 
 
 </details>
