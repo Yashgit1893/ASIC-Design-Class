@@ -2799,13 +2799,12 @@ A clk-to-reg path links a clock signal to a register, enabling the register to o
 
 #### STA for synthesized Risc-V core using time period of 11.40 ns.
 
-To verify that our synthesized RISC-V Core module meets its timing constraints, we will generate setup and hold timing reports. These reports will confirm that data signals propagate correctly throughout the core. Run the following commands:
+The contents of VSDBabySoc/src/sdc/vsdbabysoc_synthesis.sdc:
 
 ```bash
 set PERIOD 11.40
 
 set_units -time ns
-
 create_clock [get_pins {pll/CLK}] -name clk -period $PERIOD
 set_clock_uncertainty -setup  [expr $PERIOD * 0.05] [get_clocks clk]
 set_clock_transition [expr $PERIOD * 0.05] [get_clocks clk]
