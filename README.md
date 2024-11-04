@@ -2923,7 +2923,7 @@ Run the following commands :
 ```bash
 cd VSDBabySoC/src
 sta
-source sta_pvt.tcl
+source sta.tcl
 ```
 
 ![Screenshot from 2024-11-04 17-48-55](https://github.com/user-attachments/assets/48baa28f-fe57-487b-b7d7-784e5db5fd1b)
