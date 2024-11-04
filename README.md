@@ -2917,6 +2917,9 @@ report_checks -path_delay min_max -fields {nets cap slew input_pins fanout} -dig
 }
 ```
 
+![Screenshot from 2024-11-04 17-48-55](https://github.com/user-attachments/assets/ef4f47a7-4ede-4533-a224-d3d0b3cbe242)
+
+
 ![Screenshot from 2024-11-04 17-48-17](https://github.com/user-attachments/assets/6246ae2e-39b3-4f3a-9205-67c4fcc95f18)
 
 Run the following commands :
