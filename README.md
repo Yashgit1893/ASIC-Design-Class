@@ -2916,10 +2916,6 @@ report_checks -path_delay min_max -fields {nets cap slew input_pins fanout} -dig
 
 }
 ```
-
-![Screenshot from 2024-11-04 17-48-55](https://github.com/user-attachments/assets/ef4f47a7-4ede-4533-a224-d3d0b3cbe242)
-
-
 ![Screenshot from 2024-11-04 17-48-17](https://github.com/user-attachments/assets/6246ae2e-39b3-4f3a-9205-67c4fcc95f18)
 
 Run the following commands :
@@ -2935,6 +2931,9 @@ source sta_pvt.tcl
 ![Screenshot from 2024-11-04 17-49-17](https://github.com/user-attachments/assets/da244e2a-784a-48d3-94d8-b24546b14517)
 
 ![Screenshot 2024-11-04 183132](https://github.com/user-attachments/assets/62450e51-99a0-4b9c-aa8a-a83f57679f75)
+
+
+![Screenshot 2024-11-04 184427](https://github.com/user-attachments/assets/826eac97-8f63-4318-be2e-77432b21152f)
 
 
  Put the values in excel and plot the graphs :
