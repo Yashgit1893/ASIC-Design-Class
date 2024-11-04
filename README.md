@@ -2931,7 +2931,17 @@ source sta_pvt.tcl
 
 ![Screenshot from 2024-11-04 17-49-17](https://github.com/user-attachments/assets/da244e2a-784a-48d3-94d8-b24546b14517)
 
+![Screenshot 2024-11-04 183132](https://github.com/user-attachments/assets/62450e51-99a0-4b9c-aa8a-a83f57679f75)
 
+
+ Put the values in excel and plot the graphs :
+
+ ![Screenshot 2024-11-04 182520](https://github.com/user-attachments/assets/22730cb5-8909-4ca1-9189-97b055060801)
+
+![Screenshot 2024-11-04 182736](https://github.com/user-attachments/assets/68a92235-41dc-480d-8144-270b46e81720)
+
+
+![Screenshot 2024-11-04 182751](https://github.com/user-attachments/assets/53f2d688-0aed-48cf-a71c-91de767dc221)
 
 
 </details>
