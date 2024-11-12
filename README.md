@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/98a65c96-1dcd-441d-8793-27e01ea7f921)# Asic-design-class
+# Asic-design-class
 
 <details>
 <summary>LAB 1: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
