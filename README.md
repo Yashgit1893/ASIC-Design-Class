@@ -3254,11 +3254,17 @@ gedit picorv32a.floorplan.def
 According to the floorplan definitions:
 
 1000 Unit Distance = 1 Micron
+
 Die width in unit distance = 660685−0 = 660685
+
 Die height in unit distance = 671405−0 = 671405
+
 Distance in microns = Value in Unit Distance/1000
+
 ​Die width in microns = 660685/1000 = 660.685 Microns
+
 Die height in microns = 671405/1000 = 671.405 Microns
+
 Area of die in microns = 660.685 × 671.405 = 443587.212425 Square Microns
 
 view the floorplan in magic by opening a new terminal and runbing the below commands:
@@ -3316,7 +3322,7 @@ A standard cell characterization flow in the industry includes the following ste
 
 These steps are combined into a configuration file for the GUNA software, which generates timing, noise, and power models, producing .lib files for timing, power, and noise characterization.
 
-Here's the information in a table format suitable for a README file:
+Timing parameters
 
 | **Timing Definition**   | **Value** |
 |-------------------------|-----------|
@@ -3335,7 +3341,7 @@ Propagation Delay: Time for an input change to reach 50% of its final value and 
 rise delay =  time(out_fall_thr) - time(in_rise_thr)
 ```
 
-Transistion time: The time it takes the signal to move between states is the transition time , where the time is measured between 10% and 90% or 20% to 80% of the signal levels.
+Transistion time: The time it takes for the signal to move between states is the transition time , where the time is measured between 10% and 90% or 20% to 80% of the signal levels.
 
 ```bash
 Fall transition time: time(slew_high_fall_thr) - time(slew_low_fall_thr)
