@@ -3429,7 +3429,7 @@ magic -T sky130A.tech sky130_inv.mag &
 
 ![image](https://github.com/user-attachments/assets/9b80082d-9257-4afe-86f0-67d0b0e7c265)
 
-#### : Inception of Layout CMOS fabrication process
+####  Inception of Layout CMOS fabrication process
 
 The 16-mask CMOS design fabrication process:
 
@@ -3445,8 +3445,7 @@ The 16-mask CMOS design fabrication process:
 - **Gate Formation**: The gate electrode is defined by etching the polysilicon layer with a photoresist mask.
 - **Source/Drain Masking and Etching**: A photoresist mask is applied to define the source and drain regions, followed by oxide layer etching.
 - **Contact/Via Formation**: Contact holes or vias are etched through the oxide layer to expose regions like source/drain or polysilicon gates.
-- **Metal Deposition**: A metal layer (typically aluminum or copper) is deposited to create inter![Screenshot 2024-11-13 140820](https://github.com/user-attachments/assets/84e399a1-31c5-4a6f-a18e-16e89f34979b)
-connects.
+- **Metal Deposition**: A metal layer (typically aluminum or copper) is deposited to create interconnects.
 - **Metal Masking and Etching**: A photoresist mask defines metal interconnects, followed by etching to remove the unwanted metal, leaving desired patterns.
 - **Passivation Layer Deposition**: A protective layer, such as silicon dioxide or nitride, is deposited to isolate and shield the metal interconnects.
 - **Final Testing and Packaging**: The fabricated wafer undergoes testing to ensure functionality, then working chips are separated, packaged, and prepared for use.
@@ -3466,6 +3465,7 @@ Inverter layout :
 
 ![Screenshot 2024-11-13 140820](https://github.com/user-attachments/assets/8c2077ff-0357-4469-9808-45dc644cd97b)
 
+![Screenshot 2024-11-13 140820](https://github.com/user-attachments/assets/84e399a1-31c5-4a6f-a18e-16e89f34979b)
 SPICE Extraction with Magic :
 
 ```bash
