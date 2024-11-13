@@ -3914,25 +3914,83 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 
 # Day 5 : Day 5 - Final steps for RTL2GDS using tritonRoute and openSTA
 
-**Maze Routing and Lee's Algorithm**
+#### Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
 
-In IC design, routing establishes a physical connection between pins on a grid. Maze routing algorithms, like Lee’s algorithm, are widely used to find efficient paths between pins in a grid layout. 
+Commands to perform all necessary stages up until now
 
-**Lee's Algorithm Steps**:
-1. **Initialization**: The algorithm begins at the source pin, assigning labels to neighboring cells, with each step increasing the label value. This incremental approach allows the algorithm to trace the shortest path.
-2. **Pathfinding**: Labels propagate outward in a wave-like manner, expanding until reaching the target pin. It prioritizes L-shaped routes but can adapt to zigzag paths if obstacles are present.
-3. **Efficiency Considerations**: While Lee’s algorithm is reliable for finding the shortest paths, it can be computationally intensive for larger grids. Consequently, designers often use optimized or alternative routing algorithms for complex designs to reduce processing time while maintaining efficient routing paths.
+```bash
 
-<img width="550" alt="image" src="https://github.com/user-attachments/assets/b428f443-5375-49ce-a3ac-4e2a8657fbec">
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
 
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+set ::env(SYNTH_SIZING) 1
+run_synthesis
+init_floorplan
+place_io
+tap_decap_or
+run_placement
+run_cts
+gen_pdn
+```
 
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/464ecb38-0e74-44f6-9d99-9b0724ebd225">
 
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/da79338a-022d-4cab-ad42-1bfbf036600b">
 
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/d3eb77de-b03e-44d4-935e-c3240905530c">
 
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/9a26752c-c9ca-4a1c-bcfd-9fd481401c94">
 
+![Screenshot 2024-11-13 213232](https://github.com/user-attachments/assets/627fc5be-624b-45c0-8c13-d57a9eab6cc1)
 
+#### Perfrom detailed routing using TritonRoute and explore the routed layout
 
+```bash
+echo $::env(CURRENT_DEF)
+echo $::env(ROUTING_STRATEGY)
+run_routing
+```
 
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/59ad8c87-d2fd-4973-809c-4fb503d0d09c">
+
+screenshot of fast route guide 
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/89445d79-f520-4712-9596-5e2b017b19ee">
+
+#### Post-Route parasitic extraction using SPEF extractor.
+
+```bash
+
+cd Desktop/work/tools/SPEF_EXTRACTOR
+
+python3 main.py /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_14-18/tmp/merged.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_14-18/results/routing/picorv32a.def
+```
+
+#### Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+
+Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in OpenROAD
+
+```bash
+openroad
+read_lef /openLANE_flow/designs/picorv32a/runs/13-11_14-18/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/routing/picorv32a.def
+write_db pico_route.db
+read_db pico_route.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/synthesis/picorv32a.synthesis_preroute.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+read_spef /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/routing/picorv32a.spef
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+exit
+```
 
 
 
