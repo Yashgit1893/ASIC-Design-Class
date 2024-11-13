@@ -3808,6 +3808,130 @@ Clock Tree Synthesis (CTS) using TritonCTS involves different techniques tailore
 
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/924510ed-04c5-44bd-9b58-3bc92d34a512">
 
+Clock Tree Synthesis (CTS) techniques used in TritonCTS also include:
+
+- **Star CTS**: Distributes the clock signal from a central point, minimizing skew across the network. However, it typically requires additional buffers near the source to drive the clock signal effectively.
+
+- **Global-Local CTS**: Combines both star and tree topologies, using a global tree for distributing clocks across different domains and local trees within each domain. This approach balances global and local timing requirements, making it suitable for complex designs.
+
+- **Mesh CTS**: Utilizes a grid-like pattern for clock distribution, ideal for highly structured designs. This approach balances simplicity with low skew, offering robustness in designs with uniform clock distribution needs.
+
+- **Adaptive CTS**: Adjusts clock tree paths dynamically based on timing and congestion considerations, providing flexibility in design. While it offers advantages in complex designs, it introduces added complexity in implementation.
+
+Crosstalk
+
+Crosstalk is interference from overlapping electromagnetic fields between adjacent circuits, causing unwanted signals. In VLSI, it can lead to data corruption, timing issues, and higher power consumption. Mitigation strategies include optimized layout and routing, shielding, and clock gating to reduce dynamic power and minimize crosstalk effects
+
+<img width="572" alt="image" src="https://github.com/user-attachments/assets/e4538821-0fe0-4971-9e7a-b2bed1bea372">
+
+
+Clock Net Shielding
+
+Clock net shielding prevents glitches by isolating the clock network, using shields connected to VDD or GND that don’t switch. It reduces interference by isolating clocks from other signals, often with dedicated routing layers and clock buffers. Additionally, clock domain isolation helps prevent cross-domain interference, avoiding metastability and maintaining synchronization.
+
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/fd58cb17-4ec7-49c6-a9aa-0a051a81d3e0">
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/ac13b7d2-84b6-4809-a4ed-146d6c927337">
+
+```bash
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+./flow.tcl -interactive
+prep -design picorv32a -tag 13-11_14-18 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+set ::env(SYNTH_SIZING) 1
+run_synthesis
+init_floorplan
+place_io
+tap_decap_or
+run_placement
+run_cts
+```
+
+![Screenshot 2024-11-13 233901](https://github.com/user-attachments/assets/1b831daa-96ac-4221-a0d3-32ea52d60334)
+
+![Screenshot 2024-11-13 233924](https://github.com/user-attachments/assets/80a410d4-b5a8-46df-bbf9-e18e602ee3b9)
+
+![Screenshot 2024-11-13 234313](https://github.com/user-attachments/assets/0ddc6da0-bdcf-43dd-bfdd-5bc8d1a10998)
+
+Setup timing analysis using real clocks
+
+A real clock in timing analysis accounts for practical factors like clock skew and clock jitter. Clock skew is the difference in arrival times of the clock signal at different parts of the circuit due to physical delays, which affects setup and hold timing margins. Clock jitter is the variability in the clock period caused by power, temperature, and noise fluctuations, leading to uncertainty in clock edge timing. Both factors are crucial for accurate timing analysis, ensuring the design performs reliably in real-world conditions.
+
+<img width="588" alt="image" src="https://github.com/user-attachments/assets/77a5606d-9faa-4c90-baeb-2bf594652bd1">
+
+enter the following commands for Post-CTS OpenROAD timing analysis:
+
+```bash
+openroad
+read_lef /openLANE_flow/designs/picorv32a/runs/13-11_14-18/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/cts/picorv32a.cts.def
+write_db pico_cts.db
+read_db pico_cts.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/synthesis/picorv32a.synthesis_cts.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+exit
+```
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/4ff50f64-44fd-4de8-865f-a8ebec85c7cd">
+
+```bash
+echo $::env(CTS_CLK_BUFFER_LIST)
+set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
+echo $::env(CTS_CLK_BUFFER_LIST)
+echo $::env(CURRENT_DEF)
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/placement/picorv32a.placement.def
+run_cts
+echo $::env(CTS_CLK_BUFFER_LIST)
+openroad
+read_lef /openLANE_flow/designs/picorv32a/runs/13-11_14-18/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/cts/picorv32a.cts.def
+write_db pico_cts1.db
+read_db pico_cts.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/13-11_14-18/results/synthesis/picorv32a.synthesis_cts.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+report_checks -path_delay min_max -fields {slew transd net cap input_pins} -format full_clock_expanded -digits 4
+report_clock_skew -hold
+report_clock_skew -setup
+exit
+echo $::env(CTS_CLK_BUFFER_LIST)
+set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_sc_hd__clkbuf_1]
+echo $::env(CTS_CLK_BUFFER_LIST)
+```
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/413df5cc-35de-4c07-bab2-ab8bab2ceb25">
+
+<img width="958" alt="image" src="https://github.com/user-attachments/assets/d16e49bd-72b2-4ba3-bc12-482c1f30e266">
+
+# Day 5 : Day 5 - Final steps for RTL2GDS using tritonRoute and openSTA
+
+**Maze Routing and Lee's Algorithm**
+
+In IC design, routing establishes a physical connection between pins on a grid. Maze routing algorithms, like Lee’s algorithm, are widely used to find efficient paths between pins in a grid layout. 
+
+**Lee's Algorithm Steps**:
+1. **Initialization**: The algorithm begins at the source pin, assigning labels to neighboring cells, with each step increasing the label value. This incremental approach allows the algorithm to trace the shortest path.
+2. **Pathfinding**: Labels propagate outward in a wave-like manner, expanding until reaching the target pin. It prioritizes L-shaped routes but can adapt to zigzag paths if obstacles are present.
+3. **Efficiency Considerations**: While Lee’s algorithm is reliable for finding the shortest paths, it can be computationally intensive for larger grids. Consequently, designers often use optimized or alternative routing algorithms for complex designs to reduce processing time while maintaining efficient routing paths.
+
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/b428f443-5375-49ce-a3ac-4e2a8657fbec">
+
+
+
+
+
+
+
+
 
 
 
