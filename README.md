@@ -3989,9 +3989,6 @@ run_routing
 
 ![Screenshot 2024-11-13 213232](https://github.com/user-attachments/assets/627fc5be-624b-45c0-8c13-d57a9eab6cc1)
 
-![image](https://github.com/user-attachments/assets/44ed9d85-8f9b-4c0a-92ee-4dd12370f314)
-
-
 screenshot of fast route guide 
 
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/89445d79-f520-4712-9596-5e2b017b19ee">
