@@ -3190,6 +3190,10 @@ Flop ratio = Number of D Flip flops = 1613  = 0.1084
              Total Number of cells    14876
 ```
 
+Wire Count: 14,596
+Cell Count: 14,876, including specific cells like sky130_fd_sc_hd__a2111o_2, sky130_fd_sc_hd__and2_2.
+D Flip-flops: 1,613 with a flop ratio of 0.1084
+
 
 # Day 2 : Good floorplan vs bad floorplan and introduction to library cells
 
