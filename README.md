@@ -3941,7 +3941,7 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 
 #### Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
 
-Commands to perform all necessary stages up until now
+Ru the Commands to perform all necessary stages
 
 ```bash
 
@@ -3974,6 +3974,9 @@ gen_pdn
 
 ![Screenshot 2024-11-13 213232](https://github.com/user-attachments/assets/627fc5be-624b-45c0-8c13-d57a9eab6cc1)
 
+![image](https://github.com/user-attachments/assets/fac2e0af-9213-4adb-a58d-67cec07ba8f4)
+
+
 #### Perfrom detailed routing using TritonRoute and explore the routed layout
 
 ```bash
@@ -3983,6 +3986,11 @@ run_routing
 ```
 
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/59ad8c87-d2fd-4973-809c-4fb503d0d09c">
+
+![Screenshot 2024-11-13 213232](https://github.com/user-attachments/assets/627fc5be-624b-45c0-8c13-d57a9eab6cc1)
+
+![image](https://github.com/user-attachments/assets/44ed9d85-8f9b-4c0a-92ee-4dd12370f314)
+
 
 screenshot of fast route guide 
 
