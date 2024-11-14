@@ -3289,6 +3289,11 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 Run placement
 
 ```bash
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+run_synthesis
+run_floorplan
 run_placement
 ```
 
@@ -3399,7 +3404,6 @@ When the PMOS transistor is thicker than the NMOS, the CMOS inverter will have a
 
 ```bash
 Vin in 0 2.5
-*** Simulation Command ***
 .op
 .dc Vin 0 2.5 0.05
 ```
@@ -3803,6 +3807,9 @@ report_net -connections _13111_
 replace_cell _16171_ sky130_fd_sc_hd__nor3_2
 report_checks -fields {net cap slew input_pins} -digits 4
 ```
+![image](https://github.com/user-attachments/assets/5fafd314-f88e-4873-bd11-7ba213a438aa)
+
+
 Clock Tree Synthesis (CTS) using TritonCTS involves different techniques tailored to meet specific design requirements:
 
 - **Balanced Tree CTS**: This method builds a balanced, binary-like tree structure to ensure equal path lengths from the clock source to each clock sink, effectively minimizing clock skew. While providing good timing accuracy, it typically offers moderate power efficiency.
@@ -3810,7 +3817,8 @@ Clock Tree Synthesis (CTS) using TritonCTS involves different techniques tailore
 - **H-tree CTS**: This technique utilizes an "H"-shaped layout, which is particularly effective for covering large chip areas. It supports better power efficiency and is commonly used in designs where uniform clock distribution across a wide area is essential.
 
 
-<img width="959" alt="image" src="https://github.com/user-attachments/assets/924510ed-04c5-44bd-9b58-3bc92d34a512">
+![image](https://github.com/user-attachments/assets/b0630499-929e-4c57-8220-289d38a1ebed)
+
 
 Clock Tree Synthesis (CTS) techniques used in TritonCTS also include:
 
@@ -3835,6 +3843,21 @@ Clock net shielding prevents glitches by isolating the clock network, using shie
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/fd58cb17-4ec7-49c6-a9aa-0a051a81d3e0">
 
+to insert this updated netlist to PnR flow and we can use write_verilog and overwrite the synthesis netlist but before that we are going to make a copy of the old old netlist:
+
+```bash
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_14-18/results/synthesis/
+ls
+cp picorv32a.synthesis.v picorv32a.synthesis_old.v
+ls
+```
+Run the following commands:
+
+```bash
+write_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_14-18/results/synthesis/picorv32a.synthesis.v
+exit
+```
+
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/ac13b7d2-84b6-4809-a4ed-146d6c927337">
 
 ```bash
@@ -3853,8 +3876,6 @@ tap_decap_or
 run_placement
 run_cts
 ```
-
-![Screenshot 2024-11-13 233901](https://github.com/user-attachments/assets/1b831daa-96ac-4221-a0d3-32ea52d60334)
 
 ![Screenshot 2024-11-13 233924](https://github.com/user-attachments/assets/80a410d4-b5a8-46df-bbf9-e18e602ee3b9)
 
