@@ -4708,6 +4708,100 @@ cd OpenROAD-flow-scripts
 sudo ./setup.sh
 ```
 
+![Screenshot from 2024-11-25 01-05-29](https://github.com/user-attachments/assets/9e7c6c32-623c-431d-bb5c-5752b6fa35d3)
+
+![Screenshot from 2024-11-25 01-17-55](https://github.com/user-attachments/assets/c17703a3-1d8a-4e6d-be74-f793b66630d5)
+
+Build tool on local machine command:
+
+```bash
+./build_openroad.sh --local --threads 2
+```
+
+![Screenshot from 2024-11-25 11-47-25](https://github.com/user-attachments/assets/a28c3328-50d5-4102-881f-332f9378ea13)
+
+![Screenshot from 2024-11-25 12-05-04](https://github.com/user-attachments/assets/878f1a06-0766-471c-b04b-8ead52e219bc)
+
+verify installation :
+
+```bash
+source ./env.sh
+yosys -help
+openroad -help
+cd flow
+make
+make gui_final
+```
+![Screenshot from 2024-11-25 12-09-05](https://github.com/user-attachments/assets/8dbca2ff-4075-4b84-ba2d-392699973591)
+
+![Screenshot from 2024-11-25 12-09-51](https://github.com/user-attachments/assets/5c86ff81-5a5e-48b4-94d0-17b116b4ba4b)
+
+![Screenshot from 2024-11-25 12-10-21](https://github.com/user-attachments/assets/55fd86df-28dd-4160-891b-bd9e5e3370a4)
+
+![Screenshot from 2024-11-25 12-11-39](https://github.com/user-attachments/assets/d2ab2112-72c1-4b20-bab3-45c546771336)
+
+
+![Screenshot from 2024-11-25 12-20-44](https://github.com/user-attachments/assets/fff9015c-e024-423f-ba12-b7745f66b7a0)
+
+Automated RTL2GDS Flow for VSDBabySoC:
+
+- Create a directory named `vsdbabysoc` inside `OpenROAD-flow-scripts/flow/designs/sky130hd`.  
+- Copy the folders `gds`, `include`, `lef`, and `lib` from the `VSDBabySoC` folder on your system into this new directory.  
+
+- Ensure the following files are present in each folder:  
+  - **gds folder**: `avsddac.gds`, `avsdpll.gds`  
+  - **include folder**: `sandpiper.vh`, `sandpiper_gen.vh`, `sp_default.vh`, `sp_verilog.vh`  
+  - **lef folder**: `avsddac.lef`, `avsdpll.lef`  
+  - **lib folder**: `avsddac.lib`, `avsdpll.lib`  
+
+- Copy the constraints file `vsdbabysoc_synthesis.sdc` from the `VSDBabySoC` folder into the `vsdbabysoc` directory.  
+- Copy the files `macro.cfg` and `pin_order.cfg` from the `VSDBabySoC` folder into the same directory.  
+
+
+Now run the following commands in terminal:
+
+```bash
+cd OpenROAD-flow-scripts
+source env.sh
+cd flow
+```
+
+Commands for synthesis :
+
+```bash
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
+```
+
+![Screenshot from 2024-11-26 02-32-06](https://github.com/user-attachments/assets/bc3265d0-99db-46a5-9047-b33cc50177ff)
+
+![Screenshot from 2024-11-26 02-31-58](https://github.com/user-attachments/assets/a19181c2-2aab-4de9-9a5a-1e9da557943b)
+
+Synthesis reports :
+
+![Screenshot from 2024-11-26 02-32-55](https://github.com/user-attachments/assets/2749193a-a4df-4374-a7bc-8a4bae36d685)
+
+![Screenshot from 2024-11-26 02-33-20](https://github.com/user-attachments/assets/4b461d54-70e0-44ce-9cff-287f72e58e24)
+
+![Screenshot from 2024-11-26 02-33-42](https://github.com/user-attachments/assets/de59dafb-63b0-41d0-afc0-ec5165c00cc0)
+
+![Screenshot from 2024-11-26 02-34-58](https://github.com/user-attachments/assets/917d73ce-3d5f-4ec6-862b-e9cc38fa9023)
+
+![Screenshot from 2024-11-26 02-35-12](https://github.com/user-attachments/assets/2228e0c4-31e8-48c4-a9a1-32965a294a27)
+
+![Screenshot from 2024-11-26 02-35-16](https://github.com/user-attachments/assets/50b857fc-4c15-4373-8aa4-8d056aaf56f5)
+
+![Screenshot from 2024-11-26 02-35-19](https://github.com/user-attachments/assets/020debbb-39f0-4f7a-894a-8b7a2294e358)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
