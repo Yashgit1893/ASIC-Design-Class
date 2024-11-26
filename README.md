@@ -1,4 +1,4 @@
-![Screenshot from 2024-11-26 05-45-09](https://github.com/user-attachments/assets/6d839fbc-82df-4932-8f36-d556bdac8c07)<details>
+<details>
 <summary>LAB 1: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
 
 `sum1ton.c` is the file containing code to calculate the sum from 1 to n.
