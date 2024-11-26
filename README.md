@@ -1,4 +1,4 @@
-<details>
+![Screenshot from 2024-11-26 05-45-09](https://github.com/user-attachments/assets/6d839fbc-82df-4932-8f36-d556bdac8c07)<details>
 <summary>LAB 1: C program to calculate sum from 1 to n (n=15) and then compiling the code with both GCC compiler</summary>
 
 `sum1ton.c` is the file containing code to calculate the sum from 1 to n.
@@ -4809,6 +4809,14 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_floorplan
 
 ![Screenshot from 2024-11-26 04-13-56](https://github.com/user-attachments/assets/e1af762b-0601-441b-9c91-4cc83a6e02a8)
 
+** Report Screenshots **
+
+![Screenshot from 2024-11-26 05-45-09](https://github.com/user-attachments/assets/10259b17-7dd2-4e6b-be0c-611ef1245822)
+
+![Screenshot from 2024-11-26 05-45-12](https://github.com/user-attachments/assets/ba5a89bb-3abe-4419-adc5-e48b57d438e8)
+
+
+
 Commands for Placement:
 
 ```
@@ -4830,6 +4838,17 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_place
 ![Screenshot from 2024-11-26 04-36-59](https://github.com/user-attachments/assets/838c4207-3e0f-4916-b3ed-a37ad50a67ba)
 
 ![Screenshot from 2024-11-26 04-51-25](https://github.com/user-attachments/assets/e457afac-0ba8-4e46-a731-7f05612f0f32)
+
+
+** Place Screenshots **
+
+![Screenshot from 2024-11-26 05-49-16](https://github.com/user-attachments/assets/bde25199-1727-4e6f-8b6d-5d3fb8a44bb0)
+
+
+![Screenshot from 2024-11-26 05-49-21](https://github.com/user-attachments/assets/97378d8e-3d3e-4786-b5a5-c310d3dd8465)
+
+
+
 
 
 ```
