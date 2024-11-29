@@ -3972,8 +3972,6 @@ gen_pdn
 
 ![Screenshot 2024-11-13 213232](https://github.com/user-attachments/assets/627fc5be-624b-45c0-8c13-d57a9eab6cc1)
 
-![image](https://github.com/user-attachments/assets/fac2e0af-9213-4adb-a58d-67cec07ba8f4)
-
 
 #### Perfrom detailed routing using TritonRoute and explore the routed layout
 
@@ -5516,6 +5514,12 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk route
 
 
 ![Screenshot from 2024-11-26 05-19-18](https://github.com/user-attachments/assets/c54011b0-2e18-4811-b3ae-c06cda4bb16a)
+
+
+Note : I had finished this assignment in time that is 3 days ago ( current date and time : 29-11-2024, 14:29 pm). I have made a change in one of the previous lab.
+i have attached a sceenshot of the latest lab assignment finished time for reference
+
+![image](https://github.com/user-attachments/assets/8e5ba36b-e948-4d1b-80d7-31c13c0a4042)
 
 
 </details>
