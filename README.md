@@ -3804,7 +3804,7 @@ report_net -connections _13111_
 replace_cell _16171_ sky130_fd_sc_hd__nor3_2
 report_checks -fields {net cap slew input_pins} -digits 4
 ```
-![image](https://github.com/user-attachments/assets/5fafd314-f88e-4873-bd11-7ba213a438aa)
+
 
 
 Clock Tree Synthesis (CTS) using TritonCTS involves different techniques tailored to meet specific design requirements:
