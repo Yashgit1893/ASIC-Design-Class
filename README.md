@@ -3391,7 +3391,7 @@ dc1
 plot out vs in
 ```
 
-![image](https://github.com/user-attachments/assets/b951a968-4fd7-4ff7-b7f4-6c08269d8201)
+
 
 To find the switching threshold :
 
@@ -3406,7 +3406,6 @@ Vin in 0 2.5
 .dc Vin 0 2.5 0.05
 ```
 
-![image](https://github.com/user-attachments/assets/080cf3ec-7b18-4b3a-8f78-73e3c0f5927b)
 
 Simulation commands :
 
@@ -3418,7 +3417,7 @@ Vin in 0 0 pulse 0 2.5 0 10p 10p 1n 2n
 
 SPICE simulation for transient analysis :
 
-![image](https://github.com/user-attachments/assets/55d6568b-a03b-4b7e-a87c-1e939e16446b)
+
 
 Now, clone the custom inverter :
 
@@ -5516,7 +5515,7 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk route
 ![Screenshot from 2024-11-26 05-19-18](https://github.com/user-attachments/assets/c54011b0-2e18-4811-b3ae-c06cda4bb16a)
 
 
-Note : I had finished this assignment in time that is 3 days ago ( current date and time : 29-11-2024, 14:29 pm). I have made a change in one of the previous lab.
+Note : I had finished this assignment in time that is 3 days ago ( current date and time : 29-11-2024, 17:15 pm). I have made change in one of the previous lab.
 i have attached a sceenshot of the latest lab assignment finished time for reference
 
 ![image](https://github.com/user-attachments/assets/8e5ba36b-e948-4d1b-80d7-31c13c0a4042)
